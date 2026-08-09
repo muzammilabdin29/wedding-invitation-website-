@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Wedding Invitation | Shivam &amp; Supriya</title>
+<meta name="description" content="Join Shivam & Supriya as they celebrate their royal Patna wedding." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Marcellus&family=Mukta:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- Ambient gold particles -->
+<div class="particles" id="particles" aria-hidden="true"></div>
+
+<!-- ============ OPENING GATE SCREEN ============ -->
+<section class="gate" id="gate">
+  <div class="gate__bg"></div>
+  <div class="gate__overlay"></div>
+  <div class="gate__content">
+    <p class="ornament">✦</p>
+    <p class="eyebrow">You Are Invited</p>
+    <h1 class="gate__names">Shivam <span class="amp">&amp;</span> Supriya</h1>
+    <button class="btn btn--gold" id="openInvite">
+      <span>Open Invitation</span>
+    </button>
+    <p class="gate__hint">Tap to begin the celebration</p>
+  </div>
+</section>
+
+<!-- ============ MAIN INVITATION (hidden until opened) ============ -->
+<main class="invite" id="invite" hidden>
+
+  <!-- HERO -->
+  <header class="hero">
+    <img class="hero__om" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Om_symbol.svg/250px-Om_symbol.svg.png" alt="Om symbol" />
+    <p class="eyebrow">Together with our families</p>
+    <h1 class="hero__names">Shivam <span class="amp">&amp;</span> Supriya</h1>
+    <p class="hero__tagline">Invite you to join us in the celebration of our love</p>
+    <div class="hero__meta">
+      <div class="hero__meta-date">
+        <span>NOVEMBER 24, 2026</span>
+      </div>
+      <span>PATNA, BIHAR</span>
+    </div>
+    <div class="hero__countdown" id="countdown" aria-label="Countdown to the wedding">
+      <div class="countdown__unit"><span id="cd-days">00</span><small>Days</small></div>
+      <div class="countdown__unit"><span id="cd-hours">00</span><small>Hours</small></div>
+      <div class="countdown__unit"><span id="cd-mins">00</span><small>Mins</small></div>
+      <div class="countdown__unit"><span id="cd-secs">00</span><small>Secs</small></div>
+    </div>
+    <img class="mandala mandala--hero" src="https://www.svgrepo.com/show/530219/mandala.svg" alt="" aria-hidden="true" />
+  </header>
+
+  <!-- OUR STORY -->
+  <section class="section story" id="story">
+    <div style="text-align: center;">
+      <h2 class="section__title story__title">Our Story</h2>
+    </div>
+    <div class="story__layout">
+      <div class="story__person">
+        <div class="story__photo-large">
+          <img src="../Photos/WhatsApp%20Image%202026-07-26%20at%204.35.10%20PM.jpeg" alt="Shivam" loading="lazy" />
+        </div>
+        <h3>Shivam</h3>
+        <p>&ldquo;The moment I saw her, I knew my search was over.&rdquo;</p>
+      </div>
+      <div class="story__heart">
+        <svg viewBox="0 0 24 24" width="48" height="48" fill="var(--gold)"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+      </div>
+      <div class="story__person">
+        <div class="story__photo-large">
+          <img src="../Photos/WhatsApp%20Image%202026-07-26%20at%204.24.23%20PM.jpeg" alt="Supriya" loading="lazy" />
+        </div>
+        <h3>Supriya</h3>
+        <p>&ldquo;In him, I found my love, my best friend, and my home.&rdquo;</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WEDDING EVENTS -->
+  <section class="section events" id="events">
+    <h2 class="section__title events__title">Wedding Events</h2>
+    <p class="events__subtitle">A celebration of love and tradition</p>
+    <div class="timeline">
+
+      <article class="timeline__item">
+        <div class="timeline__content">
+          <h3>The Engagement</h3>
+          <p class="timeline__date">Dec 10, 2026 | 7:00 PM</p>
+          <p class="timeline__venue">Hotel Taj Lake Palace</p>
+          <p class="timeline__tag">RING CEREMONY</p>
+        </div>
+        <div class="timeline__marker"></div>
+        <div class="timeline__quote-box">
+          <div class="timeline__icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 17c-3.87 0-7-2.24-7-5s3.13-5 7-5 7 2.24 7 5-3.13 5-7 5zm0-8c-2.76 0-5 1.34-5 3s2.24 3 5 3 5-1.34 5-3-2.24-3-5-3z"/><path d="M12 4l-2 3h4z"/></svg>
+          </div>
+          <p>&ldquo;The beginning of forever.&rdquo;</p>
+        </div>
+      </article>
+
+      <article class="timeline__item">
+        <div class="timeline__content">
+          <h3>Mehendi Ceremony</h3>
+          <p class="timeline__date">Dec 11, 2026 | 11:00 AM</p>
+          <p class="timeline__venue">Poolside, The Oberoi Udaivilas</p>
+          <p class="timeline__tag">HENNA &amp; FOLK SONGS</p>
+        </div>
+        <div class="timeline__marker"></div>
+        <div class="timeline__quote-box">
+          <div class="timeline__icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 11V9a2 2 0 0 0-2-2h-1V5a2 2 0 0 0-2-2h-1V2a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v2H6a2 2 0 0 0-2 2v1H3a2 2 0 0 0-2 2v8a6 6 0 0 0 6 6h6a6 6 0 0 0 6-6v-3z"/></svg>
+          </div>
+          <p>&ldquo;Color of love on hands.&rdquo;</p>
+        </div>
+      </article>
+
+      <article class="timeline__item">
+        <div class="timeline__content">
+          <h3>Sangeet Night</h3>
+          <p class="timeline__date">Dec 11, 2026 | 8:00 PM</p>
+          <p class="timeline__venue">Grand Ballroom, Udaivilas</p>
+          <p class="timeline__tag">DANCE &amp; MUSIC</p>
+        </div>
+        <div class="timeline__marker"></div>
+        <div class="timeline__quote-box">
+          <div class="timeline__icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+          </div>
+          <p>&ldquo;Dance the night away!&rdquo;</p>
+        </div>
+      </article>
+
+      <article class="timeline__item">
+        <div class="timeline__content">
+          <h3>The Wedding</h3>
+          <p class="timeline__date">Dec 12, 2026 | 5:00 PM</p>
+          <p class="timeline__venue">Jagmandir Island Palace</p>
+          <p class="timeline__tag">PHERAS &amp; RECEPTION</p>
+        </div>
+        <div class="timeline__marker"></div>
+        <div class="timeline__quote-box">
+          <div class="timeline__icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          </div>
+          <p>&ldquo;The Royal Union.&rdquo;</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- BLESSINGS -->
+  <section class="section blessings" id="blessings">
+    <p class="eyebrow eyebrow--center">Blessings From</p>
+    <div class="blessings__grid">
+      <div class="blessings__card">
+        <h3>Groom&rsquo;s Parents</h3>
+        <p>Mr. Rajesh &amp; Mrs. Sunita Sharma</p>
+      </div>
+      <div class="blessings__card">
+        <h3>Bride&rsquo;s Parents</h3>
+        <p>Mr. Vikram &amp; Mrs. Anjali Mehta</p>
+      </div>
+    </div>
+    <p class="blessings__footnote">And Grandparents</p>
+  </section>
+
+  <!-- VENUE -->
+  <section class="section venue" id="venue">
+    <p class="eyebrow eyebrow--center">The Royal Venue</p>
+    <h2 class="section__title">Find Us Here</h2>
+    <div class="venue__map">
+      <iframe
+        title="Venue Map"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3628.6473090407767!2d73.6826693751429!3d24.576599978111953!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396cc51e5e050017%3A0xc457335607593d6a!2sThe%20Oberoi%20Udaivilas%2C%20Udaipur!5e0!3m2!1sen!2sin!4v1709400000000!5m2!1sen!2sin"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+    <p class="venue__name">The Oberoi Udaivilas, Udaipur</p>
+    <a class="btn btn--outline" href="https://maps.google.com" target="_blank" rel="noopener">Get Directions</a>
+  </section>
+
+  <!-- RSVP -->
+  <section class="section rsvp" id="rsvp">
+    <p class="eyebrow eyebrow--center">RSVP</p>
+    <h2 class="section__title">Please confirm your presence by November 1st</h2>
+
+    <form id="rsvpForm" class="rsvp__form" novalidate>
+      <div class="field">
+        <label for="fullName">Full Name</label>
+        <input type="text" id="fullName" name="full_name" placeholder="Your full name" required maxlength="120" />
+      </div>
+
+      <div class="field">
+        <label for="guests">Number of Guests</label>
+        <select id="guests" name="guests" required>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Attending?</label>
+        <div class="radio-group">
+          <label class="radio-pill">
+            <input type="radio" name="attending" value="true" checked />
+            <span>Joyfully Accepts</span>
+          </label>
+          <label class="radio-pill">
+            <input type="radio" name="attending" value="false" />
+            <span>Regretfully Declines</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="message">Message <small>(optional)</small></label>
+        <textarea id="message" name="message" rows="3" maxlength="500" placeholder="A wish for the couple..."></textarea>
+      </div>
+
+      <button type="submit" class="btn btn--gold btn--full" id="rsvpSubmit">
+        <span>Send Confirmation</span>
+      </button>
+
+      <p class="rsvp__error" id="rsvpError" hidden></p>
+    </form>
+
+    <div class="rsvp__thankyou" id="rsvpThankYou" hidden>
+      <p class="ornament">✦</p>
+      <h3>Thank You!</h3>
+      <p>Your response has been recorded.</p>
+      <p>We look forward to seeing you.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <h2 class="footer__names">Shivam <span class="amp">&amp;</span> Supriya</h2>
+    <p class="footer__hashtag">#ShivamSupriyaWedding</p>
+    <p class="footer__credit">Designed with ❤ for the special day</p>
+  </footer>
+
+</main>
+
+<audio id="bgMusic" loop>
+  <source src="../Photos/kesariya.mp3" type="audio/mpeg" />
+</audio>
+
+<button id="musicToggle" class="music-toggle" aria-label="Toggle Music">
+  <svg id="musicIconOn" viewBox="0 0 24 24" width="24" height="24" fill="currentColor" style="display:none;">
+    <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+  </svg>
+  <svg id="musicIconOff" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+    <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+  </svg>
+</button>
+
+<script src="js/script.js"></script>
+</body>
+</html>

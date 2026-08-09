@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Backend data
+backend/data/
+*.db
+*.sqlite3
+
+# Env files
+.env
+*.env.local
+
+# Node (if you later add tooling)
+node_modules/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Docker
+*.log

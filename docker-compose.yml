@@ -1,0 +1,24 @@
+services:
+  backend:
+    build: ./backend
+    container_name: wedding-backend
+    restart: unless-stopped
+    environment:
+      - CORS_ORIGINS=*
+      - DATABASE_URL=sqlite:///./data/wedding.db
+    volumes:
+      - backend_data:/app/data
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build: ./frontend
+    container_name: wedding-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+
+volumes:
+  backend_data:
