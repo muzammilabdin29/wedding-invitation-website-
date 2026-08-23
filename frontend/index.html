@@ -16,18 +16,79 @@
 <!-- Ambient gold particles -->
 <div class="particles" id="particles" aria-hidden="true"></div>
 
-<!-- ============ OPENING GATE SCREEN ============ -->
-<section class="gate" id="gate">
+<!-- ============ OPENING ENVELOPE SCREEN ============ -->
+<section class="gate" id="gate" aria-label="Wedding Envelope Screen">
   <div class="gate__bg"></div>
   <div class="gate__overlay"></div>
-  <div class="gate__content">
-    <p class="ornament">✦</p>
-    <p class="eyebrow">You Are Invited</p>
-    <h1 class="gate__names">Shivam <span class="amp">&amp;</span> Supriya</h1>
-    <button class="btn btn--gold" id="openInvite">
-      <span>Open Invitation</span>
-    </button>
-    <p class="gate__hint">Tap to begin the celebration</p>
+  
+  <div class="envelope-wrapper" id="envelopeWrapper">
+    <!-- Ambient Royal Glow -->
+    <div class="envelope-glow" aria-hidden="true"></div>
+
+    <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Click to open wedding envelope">
+      <!-- Envelope Back / Inner Liner -->
+      <div class="envelope__back">
+        <div class="envelope__liner-pattern"></div>
+      </div>
+
+      <!-- Invitation Card Inside (Slides out on click) -->
+      <div class="envelope__card" id="envelopeCard">
+        <div class="envelope__card-inner">
+          <div class="card__corner top-left"></div>
+          <div class="card__corner top-right"></div>
+          <div class="card__corner bottom-left"></div>
+          <div class="card__corner bottom-right"></div>
+          <div class="card__om">ॐ</div>
+          <p class="card__eyebrow">|| Shree Ganeshay Namah ||</p>
+          <h2 class="card__title">Shivam <span class="amp">&amp;</span> Supriya</h2>
+          <p class="card__text">Cordially invite you to celebrate their wedding</p>
+          <div class="card__divider"><span>✦</span></div>
+          <p class="card__date">NOVEMBER 24, 2026</p>
+          <p class="card__venue">Patna, Bihar</p>
+        </div>
+      </div>
+
+      <!-- Pocket to hold card -->
+      <div class="envelope__pocket"></div>
+
+      <!-- Left and Right Fold Flaps -->
+      <div class="envelope__flap envelope__flap--left"></div>
+      <div class="envelope__flap envelope__flap--right"></div>
+
+      <!-- Bottom Flap with Royal Foil Label -->
+      <div class="envelope__flap envelope__flap--bottom">
+        <div class="envelope__label">
+          <span class="envelope__label-ornament">✦</span>
+          <span class="envelope__label-text">The Wedding of</span>
+          <span class="envelope__label-names">Shivam &amp; Supriya</span>
+        </div>
+      </div>
+
+      <!-- Top Flap (Unfolds 180° in 3D) -->
+      <div class="envelope__flap envelope__flap--top" id="topFlap">
+        <div class="envelope__flap-crease"></div>
+      </div>
+
+      <!-- Golden Royal Wax Seal -->
+      <div class="wax-seal" id="waxSeal" role="button" tabindex="0" aria-label="Break wax seal and open invitation">
+        <div class="wax-seal__rim"></div>
+        <div class="wax-seal__core">
+          <span class="wax-seal__sparkle">✦</span>
+          <span class="wax-seal__initials">S &amp; S</span>
+          <span class="wax-seal__date">2026</span>
+        </div>
+        <div class="wax-seal__shine"></div>
+        <div class="wax-seal__pulse"></div>
+      </div>
+    </div>
+
+    <!-- Envelope Prompt & Action Button -->
+    <div class="envelope__prompt" id="envelopePrompt">
+      <button class="btn btn--gold btn--seal" id="openInvite">
+        <span>Open Royal Invitation</span>
+      </button>
+      <p class="gate__hint">Tap the golden seal or button to open</p>
+    </div>
   </div>
 </section>
 
@@ -40,18 +101,64 @@
     <p class="eyebrow">Together with our families</p>
     <h1 class="hero__names">Shivam <span class="amp">&amp;</span> Supriya</h1>
     <p class="hero__tagline">Invite you to join us in the celebration of our love</p>
-    <div class="hero__meta">
-      <div class="hero__meta-date">
-        <span>NOVEMBER 24, 2026</span>
+
+    <!-- SCRATCH TO REVEAL WEDDING DATE & COUNTDOWN -->
+    <div class="scratch-container" id="scratchContainer">
+      <div class="scratch-card" id="scratchCard">
+        
+        <!-- Revealed Wedding Date & Countdown Inside -->
+        <div class="scratch-content" id="scratchContent">
+          <div class="hero__meta">
+            <div class="hero__meta-date">
+              <span>NOVEMBER 24, 2026</span>
+            </div>
+            <span class="hero__meta-place">PATNA, BIHAR</span>
+          </div>
+
+          <div class="hero__countdown" id="countdown" aria-label="Countdown to the wedding">
+            <div class="countdown__unit">
+              <div class="countdown__card">
+                <span id="cd-days">00</span>
+              </div>
+              <small>Days</small>
+            </div>
+            <div class="countdown__unit">
+              <div class="countdown__card">
+                <span id="cd-hours">00</span>
+              </div>
+              <small>Hours</small>
+            </div>
+            <div class="countdown__unit">
+              <div class="countdown__card">
+                <span id="cd-mins">00</span>
+              </div>
+              <small>Mins</small>
+            </div>
+            <div class="countdown__unit">
+              <div class="countdown__card">
+                <span id="cd-secs">00</span>
+              </div>
+              <small>Secs</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scratchable Golden Overlay Canvas -->
+        <canvas class="scratch-canvas" id="scratchCanvas"></canvas>
+
+        <!-- Scratch Instruction Hint -->
+        <div class="scratch-hint" id="scratchHint">
+          <span class="scratch-hint__icon">✨</span>
+          <span>Scratch with mouse/finger to reveal</span>
+        </div>
       </div>
-      <span>PATNA, BIHAR</span>
+
+      <!-- Quick Reveal Helper -->
+      <button class="btn-quick-reveal" id="btnQuickReveal" aria-label="Instant reveal wedding date">
+        <span>✦ Tap to Instant Reveal ✦</span>
+      </button>
     </div>
-    <div class="hero__countdown" id="countdown" aria-label="Countdown to the wedding">
-      <div class="countdown__unit"><span id="cd-days">00</span><small>Days</small></div>
-      <div class="countdown__unit"><span id="cd-hours">00</span><small>Hours</small></div>
-      <div class="countdown__unit"><span id="cd-mins">00</span><small>Mins</small></div>
-      <div class="countdown__unit"><span id="cd-secs">00</span><small>Secs</small></div>
-    </div>
+
     <img class="mandala mandala--hero" src="https://www.svgrepo.com/show/530219/mandala.svg" alt="" aria-hidden="true" />
   </header>
 
@@ -87,67 +194,91 @@
     <p class="events__subtitle">A celebration of love and tradition</p>
     <div class="timeline">
 
+      <!-- Nov 21: Tilak -->
       <article class="timeline__item">
         <div class="timeline__content">
-          <h3>The Engagement</h3>
-          <p class="timeline__date">Dec 10, 2026 | 7:00 PM</p>
-          <p class="timeline__venue">Hotel Taj Lake Palace</p>
-          <p class="timeline__tag">RING CEREMONY</p>
+          <h3>Tilak Ceremony</h3>
+          <p class="timeline__date">Nov 21, 2026 | 6:00 PM</p>
+          <p class="timeline__venue">
+            <a class="timeline__venue-link" href="https://maps.app.goo.gl/uyPPQ3ENX7NJNwUK8" target="_blank" rel="noopener" title="Open Tilak location in Google Maps">
+              <svg class="venue-pin-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              <span>Usri Bandh Jamshaut Road Patna Bihar &bull; View Map ↗</span>
+            </a>
+          </p>
+          <p class="timeline__tag">TILAK UTSAV</p>
         </div>
         <div class="timeline__marker"></div>
-        <div class="timeline__quote-box">
+        <div class="timeline__quote-box" onclick="window.open('https://maps.app.goo.gl/uyPPQ3ENX7NJNwUK8', '_blank')" title="Click to view location on Google Maps">
           <div class="timeline__icon">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 17c-3.87 0-7-2.24-7-5s3.13-5 7-5 7 2.24 7 5-3.13 5-7 5zm0-8c-2.76 0-5 1.34-5 3s2.24 3 5 3 5-1.34 5-3-2.24-3-5-3z"/><path d="M12 4l-2 3h4z"/></svg>
           </div>
-          <p>&ldquo;The beginning of forever.&rdquo;</p>
+          <p>&ldquo;The auspicious beginning of sacred vows.&rdquo;</p>
         </div>
       </article>
 
+      <!-- Nov 23: Haldi / Mehndi -->
       <article class="timeline__item">
         <div class="timeline__content">
-          <h3>Mehendi Ceremony</h3>
-          <p class="timeline__date">Dec 11, 2026 | 11:00 AM</p>
-          <p class="timeline__venue">Poolside, The Oberoi Udaivilas</p>
-          <p class="timeline__tag">HENNA &amp; FOLK SONGS</p>
+          <h3>Haldi &amp; Mehndi Ceremony</h3>
+          <p class="timeline__date">Nov 23, 2026 | 11:00 AM</p>
+          <p class="timeline__venue">
+            <a class="timeline__venue-link" href="https://maps.app.goo.gl/uyPPQ3ENX7NJNwUK8" target="_blank" rel="noopener" title="Open Haldi & Mehndi location in Google Maps">
+              <svg class="venue-pin-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              <span>Usri Bandh Jamshaut Road Patna Bihar &bull; View Map ↗</span>
+            </a>
+          </p>
+          <p class="timeline__tag">HALDI &amp; MEHNDI</p>
         </div>
         <div class="timeline__marker"></div>
-        <div class="timeline__quote-box">
+        <div class="timeline__quote-box" onclick="window.open('https://maps.app.goo.gl/uyPPQ3ENX7NJNwUK8', '_blank')" title="Click to view location on Google Maps">
           <div class="timeline__icon">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 11V9a2 2 0 0 0-2-2h-1V5a2 2 0 0 0-2-2h-1V2a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v2H6a2 2 0 0 0-2 2v1H3a2 2 0 0 0-2 2v8a6 6 0 0 0 6 6h6a6 6 0 0 0 6-6v-3z"/></svg>
           </div>
-          <p>&ldquo;Color of love on hands.&rdquo;</p>
+          <p>&ldquo;Colors of turmeric sunshine &amp; crimson henna.&rdquo;</p>
         </div>
       </article>
 
+      <!-- Nov 24: Baraat & Wedding -->
       <article class="timeline__item">
         <div class="timeline__content">
-          <h3>Sangeet Night</h3>
-          <p class="timeline__date">Dec 11, 2026 | 8:00 PM</p>
-          <p class="timeline__venue">Grand Ballroom, Udaivilas</p>
-          <p class="timeline__tag">DANCE &amp; MUSIC</p>
+          <h3>The Baraat &amp; Wedding</h3>
+          <p class="timeline__date">Nov 24, 2026 | 6:00 PM</p>
+          <p class="timeline__venue">
+            <a class="timeline__venue-link" href="https://maps.app.goo.gl/2swnAPzT2U7tK1G79" target="_blank" rel="noopener" title="Open Baraat & Wedding location in Google Maps">
+              <svg class="venue-pin-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              <span>Sainik Rest House Danapur Cantt, Patna &bull; View Map ↗</span>
+            </a>
+          </p>
+          <p class="timeline__tag">BARAAT &amp; PHERAS</p>
         </div>
         <div class="timeline__marker"></div>
-        <div class="timeline__quote-box">
-          <div class="timeline__icon">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
-          </div>
-          <p>&ldquo;Dance the night away!&rdquo;</p>
-        </div>
-      </article>
-
-      <article class="timeline__item">
-        <div class="timeline__content">
-          <h3>The Wedding</h3>
-          <p class="timeline__date">Dec 12, 2026 | 5:00 PM</p>
-          <p class="timeline__venue">Jagmandir Island Palace</p>
-          <p class="timeline__tag">PHERAS &amp; RECEPTION</p>
-        </div>
-        <div class="timeline__marker"></div>
-        <div class="timeline__quote-box">
+        <div class="timeline__quote-box" onclick="window.open('https://maps.app.goo.gl/2swnAPzT2U7tK1G79', '_blank')" title="Click to view location on Google Maps">
           <div class="timeline__icon">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
           </div>
-          <p>&ldquo;The Royal Union.&rdquo;</p>
+          <p>&ldquo;The Grand Baraat &amp; Sacred Pheras.&rdquo;</p>
+        </div>
+      </article>
+
+      <!-- Nov 26: Reception -->
+      <article class="timeline__item">
+        <div class="timeline__content">
+          <h3>The Grand Reception</h3>
+          <p class="timeline__date">Nov 26, 2026 | 7:30 PM</p>
+          <p class="timeline__venue">
+            <a class="timeline__venue-link" href="https://maps.app.goo.gl/RXHxwvkQmM5Brbh4A" target="_blank" rel="noopener" title="Open Reception location in Google Maps">
+              <svg class="venue-pin-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              <span>Amantran Marriage Garden Takiapar, Danapur Patna, Bihar &bull; View Map ↗</span>
+            </a>
+          </p>
+          <p class="timeline__tag">RECEPTION &amp; DINNER</p>
+        </div>
+        <div class="timeline__marker"></div>
+        <div class="timeline__quote-box" onclick="window.open('https://maps.app.goo.gl/RXHxwvkQmM5Brbh4A', '_blank')" title="Click to view location on Google Maps">
+          <div class="timeline__icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+          </div>
+          <p>&ldquo;An evening of celebration, music &amp; blessings.&rdquo;</p>
         </div>
       </article>
 
@@ -172,74 +303,21 @@
 
   <!-- VENUE -->
   <section class="section venue" id="venue">
-    <p class="eyebrow eyebrow--center">The Royal Venue</p>
+    <p class="eyebrow eyebrow--center">The Reception Venue</p>
     <h2 class="section__title">Find Us Here</h2>
     <div class="venue__map">
       <iframe
-        title="Venue Map"
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3628.6473090407767!2d73.6826693751429!3d24.576599978111953!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396cc51e5e050017%3A0xc457335607593d6a!2sThe%20Oberoi%20Udaivilas%2C%20Udaipur!5e0!3m2!1sen!2sin!4v1709400000000!5m2!1sen!2sin"
+        title="Reception Venue Map - Amantran Marriage Garden"
+        src="https://maps.google.com/maps?q=Amantran+Marriage+Garden+Takiapar+Danapur+Patna+Bihar&t=&z=15&ie=UTF8&iwloc=&output=embed"
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade">
       </iframe>
     </div>
-    <p class="venue__name">The Oberoi Udaivilas, Udaipur</p>
-    <a class="btn btn--outline" href="https://maps.google.com" target="_blank" rel="noopener">Get Directions</a>
+    <p class="venue__name">Amantran Marriage Garden Takiapar, Danapur Patna, Bihar</p>
+    <a class="btn btn--outline" href="https://maps.app.goo.gl/RXHxwvkQmM5Brbh4A" target="_blank" rel="noopener">Get Directions</a>
   </section>
 
-  <!-- RSVP -->
-  <section class="section rsvp" id="rsvp">
-    <p class="eyebrow eyebrow--center">RSVP</p>
-    <h2 class="section__title">Please confirm your presence by November 1st</h2>
 
-    <form id="rsvpForm" class="rsvp__form" novalidate>
-      <div class="field">
-        <label for="fullName">Full Name</label>
-        <input type="text" id="fullName" name="full_name" placeholder="Your full name" required maxlength="120" />
-      </div>
-
-      <div class="field">
-        <label for="guests">Number of Guests</label>
-        <select id="guests" name="guests" required>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label>Attending?</label>
-        <div class="radio-group">
-          <label class="radio-pill">
-            <input type="radio" name="attending" value="true" checked />
-            <span>Joyfully Accepts</span>
-          </label>
-          <label class="radio-pill">
-            <input type="radio" name="attending" value="false" />
-            <span>Regretfully Declines</span>
-          </label>
-        </div>
-      </div>
-
-      <div class="field">
-        <label for="message">Message <small>(optional)</small></label>
-        <textarea id="message" name="message" rows="3" maxlength="500" placeholder="A wish for the couple..."></textarea>
-      </div>
-
-      <button type="submit" class="btn btn--gold btn--full" id="rsvpSubmit">
-        <span>Send Confirmation</span>
-      </button>
-
-      <p class="rsvp__error" id="rsvpError" hidden></p>
-    </form>
-
-    <div class="rsvp__thankyou" id="rsvpThankYou" hidden>
-      <p class="ornament">✦</p>
-      <h3>Thank You!</h3>
-      <p>Your response has been recorded.</p>
-      <p>We look forward to seeing you.</p>
-    </div>
-  </section>
 
   <!-- FOOTER -->
   <footer class="footer">

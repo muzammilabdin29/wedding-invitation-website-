@@ -11,7 +11,8 @@ const API_BASE = window.API_BASE || "";
 
 document.addEventListener("DOMContentLoaded", () => {
   initParticles();
-  initGate();
+  initEnvelope();
+  initScratchCard();
   initCountdown();
   initRSVP();
   initMusic();
@@ -34,26 +35,140 @@ function initParticles() {
   }
 }
 
-/* ---------------- Opening gate ---------------- */
-function initGate() {
+/* ---------------- 3D Envelope Opening Animation ---------------- */
+function initEnvelope() {
   const gate = document.getElementById("gate");
-  const invite = document.getElementById("invite");
+  const envelopeWrapper = document.getElementById("envelopeWrapper");
+  const envelope = document.getElementById("envelope");
+  const waxSeal = document.getElementById("waxSeal");
   const openBtn = document.getElementById("openInvite");
-  if (!gate || !invite || !openBtn) return;
+  const invite = document.getElementById("invite");
+  const bgMusic = document.getElementById("bgMusic");
+  const musicIconOn = document.getElementById("musicIconOn");
+  const musicIconOff = document.getElementById("musicIconOff");
 
-  openBtn.addEventListener("click", () => {
-    gate.classList.add("gate--closed");
-    invite.hidden = false;
-    document.body.style.overflow = "auto";
+  if (!envelope || !invite) return;
 
-    // Move focus into the invitation for accessibility
-    invite.setAttribute("tabindex", "-1");
-    invite.focus({ preventScroll: true });
+  let isOpening = false;
 
+  function openEnvelope(e) {
+    if (isOpening) return;
+    isOpening = true;
+
+    // Start background music seamlessly
+    if (bgMusic && bgMusic.paused) {
+      bgMusic.play().then(() => {
+        if (musicIconOn && musicIconOff) {
+          musicIconOn.style.display = "block";
+          musicIconOff.style.display = "none";
+        }
+      }).catch((err) => console.log("Audio autoplay prevented:", err));
+    }
+
+    // Determine seal position for sparkle explosion
+    let sealX = window.innerWidth / 2;
+    let sealY = window.innerHeight / 2;
+    if (waxSeal) {
+      const rect = waxSeal.getBoundingClientRect();
+      sealX = rect.left + rect.width / 2;
+      sealY = rect.top + rect.height / 2;
+    }
+    createSparkleBurst(sealX, sealY);
+
+    // Step 1: Unfold top flap & reveal seal break
+    envelope.classList.add("is-open");
+
+    // Step 2: After card slides up out of envelope, zoom in and transition to main page
     setTimeout(() => {
-      gate.style.display = "none";
-    }, 950);
+      if (envelopeWrapper) {
+        envelopeWrapper.classList.add("envelope-wrapper--zoom");
+      }
+      invite.hidden = false;
+      setTimeout(() => {
+        if (window.refreshScratchCard) {
+          window.refreshScratchCard();
+        }
+      }, 100);
+    }, 1100);
+
+    // Step 3: Fade out gate overlay and enable scrolling
+    setTimeout(() => {
+      if (gate) {
+        gate.classList.add("gate--closed");
+      }
+      document.body.style.overflow = "auto";
+
+      // Move focus into the invitation for accessibility
+      invite.setAttribute("tabindex", "-1");
+      invite.focus({ preventScroll: true });
+    }, 1700);
+
+    // Step 4: Clean up gate element
+    setTimeout(() => {
+      if (gate) {
+        gate.style.display = "none";
+      }
+    }, 2400);
+  }
+
+  // Click & Keyboard event listeners for seal, button, and envelope
+  if (waxSeal) {
+    waxSeal.addEventListener("click", (e) => {
+      e.stopPropagation();
+      openEnvelope(e);
+    });
+    waxSeal.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        openEnvelope(e);
+      }
+    });
+  }
+
+  if (openBtn) {
+    openBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      openEnvelope(e);
+    });
+  }
+
+  envelope.addEventListener("click", openEnvelope);
+  envelope.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      openEnvelope(e);
+    }
   });
+}
+
+/* ---------------- Sparkle explosion on wax seal break ---------------- */
+function createSparkleBurst(x, y) {
+  const count = 28;
+  for (let i = 0; i < count; i++) {
+    const p = document.createElement("span");
+    p.className = "sparkle-particle";
+
+    const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.5;
+    const distance = 40 + Math.random() * 90;
+    const tx = Math.cos(angle) * distance;
+    const ty = Math.sin(angle) * distance;
+    const size = 3 + Math.random() * 6;
+    const colors = ["#ffe89c", "#d4a742", "#ffffff", "#e6cd8a", "#c9a24b"];
+    const color = colors[Math.floor(Math.random() * colors.length)];
+
+    p.style.left = `${x}px`;
+    p.style.top = `${y}px`;
+    p.style.width = `${size}px`;
+    p.style.height = `${size}px`;
+    p.style.backgroundColor = color;
+    p.style.boxShadow = `0 0 ${size * 2}px ${color}`;
+    p.style.setProperty("--tx", `${tx}px`);
+    p.style.setProperty("--ty", `${ty}px`);
+    p.style.animationDuration = `${0.6 + Math.random() * 0.4}s`;
+
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 1000);
+  }
 }
 
 /* ---------------- Countdown to the wedding ---------------- */
@@ -187,3 +302,203 @@ function initMusic() {
     });
   }
 }
+
+/* ---------------- Interactive Scratch Card to Reveal Date & Countdown ---------------- */
+function initScratchCard() {
+  const card = document.getElementById("scratchCard");
+  const canvas = document.getElementById("scratchCanvas");
+  const hint = document.getElementById("scratchHint");
+  const quickBtn = document.getElementById("btnQuickReveal");
+  if (!canvas || !card) return;
+
+  const ctx = canvas.getContext("2d");
+  let isDrawing = false;
+  let isRevealed = false;
+  let lastPoint = null;
+
+  function resizeCanvas() {
+    if (isRevealed) return;
+    const rect = card.getBoundingClientRect();
+    if (rect.width === 0 || rect.height === 0) return;
+
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    ctx.setTransform(1, 0, 0, 1, 0, 0); // reset transform
+    ctx.scale(dpr, dpr);
+
+    drawScratchLayer(rect.width, rect.height);
+  }
+
+  window.refreshScratchCard = resizeCanvas;
+
+  function drawScratchLayer(w, h) {
+    if (w === 0 || h === 0) return;
+
+    ctx.globalCompositeOperation = "source-over";
+
+    // Rich metallic gold gradient
+    const grad = ctx.createLinearGradient(0, 0, w, h);
+    grad.addColorStop(0, "#7a4e0a");
+    grad.addColorStop(0.2, "#d4a742");
+    grad.addColorStop(0.45, "#fff6cc");
+    grad.addColorStop(0.7, "#c9a24b");
+    grad.addColorStop(1, "#5c3905");
+
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, w, h);
+
+    // Diagonal gold foil glitter lines
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.22)";
+    ctx.lineWidth = 1.5;
+    for (let i = -w; i < w + h; i += 22) {
+      ctx.beginPath();
+      ctx.moveTo(i, 0);
+      ctx.lineTo(i + h, h);
+      ctx.stroke();
+    }
+
+    // Elegant inner border frame
+    ctx.strokeStyle = "rgba(255, 245, 205, 0.75)";
+    ctx.lineWidth = 2;
+    ctx.strokeRect(8, 8, w - 16, h - 16);
+
+    ctx.strokeStyle = "rgba(201, 162, 75, 0.5)";
+    ctx.lineWidth = 1;
+    ctx.strokeRect(12, 12, w - 24, h - 24);
+
+    // Decorative Text & Monogram
+    ctx.fillStyle = "#361603";
+    ctx.font = "bold 17px 'Marcellus', serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("✦ SCRATCH TO REVEAL ✦", w / 2, h / 2 - 16);
+
+    ctx.font = "italic 13px 'Cormorant Garamond', serif";
+    ctx.fillStyle = "#472105";
+    ctx.fillText("Scratch with finger / mouse for Wedding Date & Countdown", w / 2, h / 2 + 14);
+  }
+
+  function getPos(e) {
+    const rect = canvas.getBoundingClientRect();
+    if (e.touches && e.touches.length > 0) {
+      return {
+        x: e.touches[0].clientX - rect.left,
+        y: e.touches[0].clientY - rect.top,
+        clientX: e.touches[0].clientX,
+        clientY: e.touches[0].clientY,
+      };
+    }
+    return {
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+      clientX: e.clientX,
+      clientY: e.clientY,
+    };
+  }
+
+  function scratch(pos) {
+    if (isRevealed) return;
+
+    ctx.globalCompositeOperation = "destination-out";
+    ctx.beginPath();
+    ctx.arc(pos.x, pos.y, 24, 0, Math.PI * 2, false);
+    ctx.fill();
+
+    if (lastPoint) {
+      ctx.lineWidth = 48;
+      ctx.lineCap = "round";
+      ctx.beginPath();
+      ctx.moveTo(lastPoint.x, lastPoint.y);
+      ctx.lineTo(pos.x, pos.y);
+      ctx.stroke();
+    }
+    lastPoint = { x: pos.x, y: pos.y };
+
+    if (Math.random() < 0.35) {
+      createSparkleBurst(pos.clientX, pos.clientY);
+    }
+
+    checkScratchProgress();
+  }
+
+  function checkScratchProgress() {
+    const w = canvas.width;
+    const h = canvas.height;
+    if (w === 0 || h === 0) return;
+
+    try {
+      const imgData = ctx.getImageData(0, 0, w, h);
+      const data = imgData.data;
+      let transparentCount = 0;
+      const step = 16;
+      const totalSamples = data.length / (4 * step);
+
+      for (let i = 3; i < data.length; i += 4 * step) {
+        if (data[i] === 0) {
+          transparentCount++;
+        }
+      }
+
+      const percentage = (transparentCount / totalSamples) * 100;
+      if (percentage >= 35) {
+        revealAll();
+      }
+    } catch (err) {
+      // Fallback
+    }
+  }
+
+  function revealAll() {
+    if (isRevealed) return;
+    isRevealed = true;
+    canvas.classList.add("is-revealed");
+    if (hint) hint.style.display = "none";
+    if (quickBtn) quickBtn.style.display = "none";
+
+    const rect = card.getBoundingClientRect();
+    createSparkleBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
+    setTimeout(() => {
+      createSparkleBurst(rect.left + rect.width / 3, rect.top + rect.height / 3);
+      createSparkleBurst(rect.left + (rect.width * 2) / 3, rect.top + rect.height / 3);
+    }, 180);
+  }
+
+  canvas.addEventListener("mousedown", (e) => {
+    isDrawing = true;
+    const pos = getPos(e);
+    lastPoint = { x: pos.x, y: pos.y };
+    scratch(pos);
+  });
+  window.addEventListener("mousemove", (e) => {
+    if (!isDrawing) return;
+    scratch(getPos(e));
+  });
+  window.addEventListener("mouseup", () => {
+    isDrawing = false;
+    lastPoint = null;
+  });
+
+  canvas.addEventListener("touchstart", (e) => {
+    isDrawing = true;
+    const pos = getPos(e);
+    lastPoint = { x: pos.x, y: pos.y };
+    scratch(pos);
+  }, { passive: true });
+  canvas.addEventListener("touchmove", (e) => {
+    if (!isDrawing) return;
+    scratch(getPos(e));
+  }, { passive: true });
+  canvas.addEventListener("touchend", () => {
+    isDrawing = false;
+    lastPoint = null;
+  });
+
+  if (quickBtn) {
+    quickBtn.addEventListener("click", revealAll);
+  }
+
+  setTimeout(resizeCanvas, 200);
+  window.addEventListener("resize", resizeCanvas);
+}
+
