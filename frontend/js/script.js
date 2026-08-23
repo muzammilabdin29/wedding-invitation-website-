@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initEnvelope();
   initScratchCard();
   initCountdown();
+  initBlessingsInteractions();
   initRSVP();
   initMusic();
 });
@@ -78,7 +79,7 @@ function initEnvelope() {
     // Step 1: Unfold top flap & reveal seal break
     envelope.classList.add("is-open");
 
-    // Step 2: After card slides up out of envelope, zoom in and transition to main page
+    // Step 2: After card slides fully up out of envelope, zoom in and transition to main page
     setTimeout(() => {
       if (envelopeWrapper) {
         envelopeWrapper.classList.add("envelope-wrapper--zoom");
@@ -89,7 +90,7 @@ function initEnvelope() {
           window.refreshScratchCard();
         }
       }, 100);
-    }, 1100);
+    }, 1350);
 
     // Step 3: Fade out gate overlay and enable scrolling
     setTimeout(() => {
@@ -101,14 +102,14 @@ function initEnvelope() {
       // Move focus into the invitation for accessibility
       invite.setAttribute("tabindex", "-1");
       invite.focus({ preventScroll: true });
-    }, 1700);
+    }, 1950);
 
     // Step 4: Clean up gate element
     setTimeout(() => {
       if (gate) {
         gate.style.display = "none";
       }
-    }, 2400);
+    }, 2650);
   }
 
   // Click & Keyboard event listeners for seal, button, and envelope
@@ -501,4 +502,86 @@ function initScratchCard() {
   setTimeout(resizeCanvas, 200);
   window.addEventListener("resize", resizeCanvas);
 }
+
+/* ---------------- Interactive Blessings Section & Flower Shower ---------------- */
+function initBlessingsInteractions() {
+  const cards = document.querySelectorAll(".blessings__card--interactive");
+  if (!cards.length) return;
+
+  cards.forEach((card) => {
+    // 3D Parallax Tilt on Mouse Move
+    card.addEventListener("mousemove", (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      const rotateX = -(y / (rect.height / 2)) * 6;
+      const rotateY = (x / (rect.width / 2)) * 6;
+      card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px) scale(1.02)`;
+    });
+
+    card.addEventListener("mouseleave", () => {
+      card.style.transform = "";
+    });
+
+    // Flower Shower Trigger on Click or Button Tap
+    card.addEventListener("click", (e) => {
+      const rect = card.getBoundingClientRect();
+      const clickX = e.clientX || rect.left + rect.width / 2;
+      const clickY = e.clientY || rect.top + rect.height / 2;
+      createFlowerShower(clickX, clickY);
+      createSparkleBurst(clickX, clickY);
+    });
+
+    // Keyboard support
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        const rect = card.getBoundingClientRect();
+        createFlowerShower(rect.left + rect.width / 2, rect.top + rect.height / 2);
+        createSparkleBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
+      }
+    });
+  });
+}
+
+function createFlowerShower(originX, originY) {
+  const petalCount = 26;
+  const colors = [
+    "radial-gradient(circle, #ff4d6d 30%, #c9184a 100%)",
+    "radial-gradient(circle, #ff758f 30%, #ff4d6d 100%)",
+    "radial-gradient(circle, #ffb703 30%, #fb8500 100%)",
+    "radial-gradient(circle, #ffd166 30%, #f4a261 100%)",
+    "radial-gradient(circle, #ffe3e0 30%, #ff85a1 100%)",
+  ];
+
+  for (let i = 0; i < petalCount; i++) {
+    const petal = document.createElement("span");
+    petal.className = "petal-particle";
+
+    const startX = originX + (Math.random() - 0.5) * 120;
+    const startY = originY + (Math.random() - 0.5) * 60;
+    const size = 12 + Math.random() * 14;
+    const dx = (Math.random() - 0.5) * 200;
+    const endDx = dx + (Math.random() - 0.5) * 160;
+    const midY = 80 + Math.random() * 120;
+    const endY = 220 + Math.random() * 260;
+    const duration = 1.4 + Math.random() * 1.2;
+
+    petal.style.left = `${startX}px`;
+    petal.style.top = `${startY}px`;
+    petal.style.width = `${size}px`;
+    petal.style.height = `${size * 1.25}px`;
+    petal.style.background = colors[Math.floor(Math.random() * colors.length)];
+    petal.style.setProperty("--dx", `${dx}px`);
+    petal.style.setProperty("--endDx", `${endDx}px`);
+    petal.style.setProperty("--midY", `${midY}px`);
+    petal.style.setProperty("--endY", `${endY}px`);
+    petal.style.animationDuration = `${duration}s`;
+    petal.style.filter = "drop-shadow(0 4px 6px rgba(0,0,0,0.15))";
+
+    document.body.appendChild(petal);
+    setTimeout(() => petal.remove(), duration * 1000 + 100);
+  }
+}
+
 

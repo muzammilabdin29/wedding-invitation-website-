@@ -257,6 +257,7 @@ button{ font-family: inherit; cursor: pointer; }
   border-radius: 10px;
   overflow: hidden;
   z-index: 1;
+  transform: translateZ(0px);
 }
 
 .envelope__liner-pattern{
@@ -281,25 +282,27 @@ button{ font-family: inherit; cursor: pointer; }
 /* Invitation Card Inside Envelope */
 .envelope__card{
   position: absolute;
-  left: 5%;
-  right: 5%;
+  left: 6%;
+  right: 6%;
   bottom: 12px;
-  height: 268px;
+  height: 250px;
   background: linear-gradient(145deg, #fffef9 0%, #faf3e1 100%);
-  border-radius: 6px;
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(201, 162, 75, 0.7);
+  border-radius: 8px;
+  box-shadow: 0 -4px 18px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(201, 162, 75, 0.6);
   z-index: 2;
-  transition: transform 0.9s cubic-bezier(0.34, 1.2, 0.64, 1) 0.35s, z-index 0.01s 0.65s, box-shadow 0.6s ease;
+  transform: translateZ(5px);
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.3s, z-index 0.01s 0.55s, box-shadow 0.6s ease;
   overflow: hidden;
+  pointer-events: none;
 }
 
 .envelope.is-open .envelope__card{
-  transform: translateY(-165px) scale(1.04);
-  z-index: 8;
+  transform: translateY(-210px) translateZ(50px) scale(1.04);
+  z-index: 10;
   box-shadow: 
-    0 25px 50px rgba(0, 0, 0, 0.55),
+    0 25px 55px rgba(0, 0, 0, 0.65),
     0 0 0 2px var(--gold),
-    0 0 25px rgba(201, 162, 75, 0.35);
+    0 0 35px rgba(201, 162, 75, 0.45);
 }
 
 .envelope__card-inner{
@@ -309,18 +312,18 @@ button{ font-family: inherit; cursor: pointer; }
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 1.25rem 1rem;
+  padding: 0.85rem 0.75rem;
   text-align: center;
-  border: 1px solid rgba(201, 162, 75, 0.4);
-  margin: 5px;
-  border-radius: 4px;
+  border: 1px solid rgba(201, 162, 75, 0.45);
+  margin: 4px;
+  border-radius: 5px;
 }
 
 /* Card Corner Ornaments */
 .card__corner{
   position: absolute;
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12px;
   border: 1.5px solid var(--gold);
   pointer-events: none;
 }
@@ -330,7 +333,7 @@ button{ font-family: inherit; cursor: pointer; }
 .card__corner.bottom-right{ bottom: 4px; right: 4px; border-left: none; border-top: none; }
 
 .card__om{
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   color: var(--maroon);
   line-height: 1;
   margin-bottom: 2px;
@@ -339,20 +342,20 @@ button{ font-family: inherit; cursor: pointer; }
 
 .card__eyebrow{
   font-family: var(--font-accent);
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
   color: #855e14;
-  margin: 0 0 4px;
+  margin: 0 0 2px;
   text-transform: uppercase;
   font-weight: 600;
 }
 
 .card__title{
   font-family: var(--font-names);
-  font-size: clamp(2rem, 6vw, 2.5rem);
+  font-size: clamp(1.85rem, 5.5vw, 2.3rem);
   color: var(--maroon-deep);
   margin: 0.1rem 0;
-  line-height: 1.15;
+  line-height: 1.1;
   font-weight: normal;
 }
 
@@ -363,20 +366,20 @@ button{ font-family: inherit; cursor: pointer; }
 
 .card__text{
   font-family: var(--font-accent);
-  font-size: 0.8rem;
+  font-size: 0.76rem;
   font-style: italic;
   color: #634346;
-  margin: 2px 0 6px;
+  margin: 2px 0 3px;
 }
 
 .card__divider{
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 60px;
+  width: 55px;
   color: var(--gold);
-  font-size: 0.7rem;
-  margin: 2px auto 4px;
+  font-size: 0.65rem;
+  margin: 2px auto 3px;
 }
 .card__divider::before, .card__divider::after{
   content: '';
@@ -385,21 +388,21 @@ button{ font-family: inherit; cursor: pointer; }
   background: linear-gradient(90deg, transparent, var(--gold), transparent);
 }
 .card__divider span{
-  padding: 0 5px;
+  padding: 0 4px;
 }
 
 .card__date{
   font-family: var(--font-display);
-  font-size: 0.8rem;
-  letter-spacing: 0.18em;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
   color: var(--maroon);
   font-weight: 600;
-  margin: 2px 0 0;
+  margin: 1px 0 0;
 }
 
 .card__venue{
   font-family: var(--font-accent);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #7d6537;
@@ -424,6 +427,7 @@ button{ font-family: inherit; cursor: pointer; }
   clip-path: polygon(0 0, 0 100%, 50% 50%);
   background: linear-gradient(to right, #38070d 0%, #4a0d15 100%);
   z-index: 3;
+  transform: translateZ(20px);
   filter: drop-shadow(2px 0 5px rgba(0, 0, 0, 0.3));
   border-left: 1px solid rgba(201, 162, 75, 0.2);
   border-radius: 10px 0 0 10px;
@@ -434,6 +438,7 @@ button{ font-family: inherit; cursor: pointer; }
   clip-path: polygon(100% 0, 100% 100%, 50% 50%);
   background: linear-gradient(to left, #34060c 0%, #460c14 100%);
   z-index: 3;
+  transform: translateZ(20px);
   filter: drop-shadow(-2px 0 5px rgba(0, 0, 0, 0.3));
   border-right: 1px solid rgba(201, 162, 75, 0.2);
   border-radius: 0 10px 10px 0;
@@ -441,9 +446,10 @@ button{ font-family: inherit; cursor: pointer; }
 
 /* Bottom Flap */
 .envelope__flap--bottom{
-  clip-path: polygon(0 100%, 100% 100%, 50% 38%);
+  clip-path: polygon(0 100%, 100% 100%, 50% 48%);
   background: linear-gradient(to top, #2b0509 0%, #3e0910 65%, #520f18 100%);
   z-index: 4;
+  transform: translateZ(25px);
   filter: drop-shadow(0 -3px 8px rgba(0, 0, 0, 0.4));
   border-bottom: 1px solid rgba(201, 162, 75, 0.35);
   border-radius: 0 0 10px 10px;
@@ -456,7 +462,7 @@ button{ font-family: inherit; cursor: pointer; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 18px;
+  margin-bottom: 14px;
   text-align: center;
   pointer-events: none;
 }
@@ -492,7 +498,8 @@ button{ font-family: inherit; cursor: pointer; }
   transform-origin: top center;
   transform-style: preserve-3d;
   z-index: 5;
-  transition: transform 0.85s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.01s 0.42s;
+  transform: rotateX(0deg) translateZ(30px);
+  transition: transform 0.85s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.01s 0.25s;
   filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.5));
   border-top: 1px solid rgba(201, 162, 75, 0.45);
   border-radius: 10px 10px 0 0;
@@ -508,8 +515,8 @@ button{ font-family: inherit; cursor: pointer; }
 }
 
 .envelope.is-open .envelope__flap--top{
-  transform: rotateX(180deg);
-  z-index: 1;
+  transform: rotateX(180deg) translateZ(10px);
+  z-index: 0;
   filter: drop-shadow(0 -3px 8px rgba(0, 0, 0, 0.3));
 }
 
@@ -518,7 +525,7 @@ button{ font-family: inherit; cursor: pointer; }
   position: absolute;
   top: 62%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) translateZ(35px);
   width: 72px;
   height: 72px;
   border-radius: 50%;
@@ -540,7 +547,7 @@ button{ font-family: inherit; cursor: pointer; }
 }
 
 .envelope.is-open .wax-seal{
-  transform: translate(-50%, -50%) scale(1.4);
+  transform: translate(-50%, -50%) translateZ(35px) scale(1.4);
   opacity: 0;
   pointer-events: none;
 }
@@ -1227,35 +1234,283 @@ button{ font-family: inherit; cursor: pointer; }
   font-size: 1.2rem;
 }
 
-/* ---------- Blessings ---------- */
-.blessings{ text-align: center; }
+/* ---------- Blessings Section (Interactive) ---------- */
+.blessings{
+  position: relative;
+  text-align: center;
+  background: radial-gradient(circle at 50% 30%, rgba(255, 250, 235, 0.9) 0%, rgba(246, 238, 222, 0.6) 100%);
+  overflow: hidden;
+}
+
+.blessings__header{
+  margin-bottom: 2.5rem;
+}
+
+.blessings__title{
+  margin: 0.4rem 0 0.6rem;
+}
+
+.blessings__shloka{
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  letter-spacing: 0.12em;
+  color: var(--maroon);
+  display: inline-block;
+  padding: 0.4rem 1.4rem;
+  background: rgba(201, 162, 75, 0.12);
+  border: 1px solid rgba(201, 162, 75, 0.35);
+  border-radius: 999px;
+  margin: 0.4rem 0 0;
+  box-shadow: 0 2px 10px rgba(201, 162, 75, 0.1);
+}
 
 .blessings__grid{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-  max-width: 34rem;
+  gap: 2rem;
+  max-width: 52rem;
   margin: 0 auto;
+  perspective: 1000px;
 }
+
 .blessings__card{
-  background: #fff;
-  border: 1px solid var(--cream-dim);
-  border-radius: var(--radius);
-  padding: 1.5rem;
-  box-shadow: 0 10px 24px var(--shadow);
+  position: relative;
+  background: linear-gradient(160deg, #fffefc 0%, #faf3e1 100%);
+  border: 1.5px solid rgba(201, 162, 75, 0.45);
+  border-radius: 14px;
+  padding: 2.2rem 1.6rem 1.8rem;
+  box-shadow: 0 15px 35px rgba(43, 6, 10, 0.08), 0 0 0 1px rgba(201, 162, 75, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease, border-color 0.3s ease;
+  cursor: pointer;
+  user-select: none;
+  overflow: hidden;
 }
-.blessings__card h3{
+
+.blessings__card:hover{
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 22px 50px rgba(43, 6, 10, 0.16), 0 0 25px rgba(201, 162, 75, 0.35);
+  border-color: var(--gold);
+}
+
+.blessings__shimmer{
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.6), transparent);
+  transform: skewX(-25deg);
+  pointer-events: none;
+  transition: 0.6s ease;
+}
+
+.blessings__card:hover .blessings__shimmer{
+  left: 150%;
+  transition: 0.8s ease;
+}
+
+/* Card Corner Filigrees */
+.blessings__corner{
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid var(--gold);
+  pointer-events: none;
+  opacity: 0.7;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.blessings__corner.top-left{ top: 8px; left: 8px; border-right: none; border-bottom: none; }
+.blessings__corner.top-right{ top: 8px; right: 8px; border-left: none; border-bottom: none; }
+.blessings__corner.bottom-left{ bottom: 8px; left: 8px; border-right: none; border-top: none; }
+.blessings__corner.bottom-right{ bottom: 8px; right: 8px; border-left: none; border-top: none; }
+
+.blessings__card:hover .blessings__corner{
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+.blessings__icon-badge{
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff0b8 0%, #d4a742 60%, #855e14 100%);
+  color: #3b070e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  box-shadow: 0 6px 16px rgba(201, 162, 75, 0.4), inset 0 1px 2px #fff;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.blessings__card:hover .blessings__icon-badge{
+  transform: scale(1.12) rotate(6deg);
+}
+
+.blessings__role-tag{
+  font-family: var(--font-accent);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--gold-light);
+  background: linear-gradient(135deg, #440a12 0%, #63121c 100%);
+  padding: 0.35rem 1rem;
+  border-radius: 999px;
+  margin-bottom: 0.85rem;
+  border: 1px solid rgba(201, 162, 75, 0.5);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.blessings__name{
   font-family: var(--font-display);
-  color: var(--maroon);
-  font-size: 1.05rem;
-  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  color: var(--maroon-deep);
+  margin: 0.1rem 0;
+  line-height: 1.25;
 }
-.blessings__card p{ margin: 0; }
-.blessings__footnote{
-  margin-top: 1.5rem;
+
+.blessings__amp{
+  color: var(--gold);
+  font-family: var(--font-accent);
+  font-size: 1.15rem;
+  font-style: italic;
+  margin: 0.1rem 0;
+  display: block;
+}
+
+.blessings__divider{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  color: var(--gold);
+  font-size: 0.75rem;
+  margin: 0.7rem auto 0.6rem;
+}
+.blessings__divider::before, .blessings__divider::after{
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.blessings__divider span{
+  padding: 0 6px;
+}
+
+.blessings__quote{
   font-family: var(--font-accent);
   font-style: italic;
-  color: var(--plum);
+  font-size: 0.95rem;
+  color: #5a3c40;
+  line-height: 1.5;
+  margin: 0.4rem 0 1.2rem;
+  flex: 1;
+}
+
+.blessings__shower-btn{
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--maroon-deep);
+  background: linear-gradient(135deg, #fff7eb 0%, #f7e6c4 100%);
+  border: 1px solid rgba(201, 162, 75, 0.6);
+  padding: 0.55rem 1.15rem;
+  border-radius: 999px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.blessings__shower-btn:hover{
+  background: linear-gradient(135deg, #fff0db 0%, #ecd4a7 100%);
+  transform: scale(1.06);
+  box-shadow: 0 6px 18px rgba(201, 162, 75, 0.35);
+  border-color: var(--gold);
+}
+
+/* Grandparents Tribute */
+.blessings__grandparents{
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.85) 0%, rgba(250, 243, 226, 0.9) 100%);
+  border: 1.5px dashed rgba(201, 162, 75, 0.6);
+  border-radius: 14px;
+  padding: 1.75rem 1.5rem;
+  max-width: 44rem;
+  margin: 2.5rem auto 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  position: relative;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blessings__grandparents:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(201, 162, 75, 0.25);
+  border-color: var(--gold);
+}
+
+.grandparents__ornament{
+  color: var(--gold);
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  margin-bottom: 0.3rem;
+}
+
+.grandparents__title{
+  font-family: var(--font-accent);
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #855e14;
+  font-weight: 600;
+  margin: 0 0 0.3rem;
+}
+
+.grandparents__subtitle{
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  color: var(--maroon-deep);
+  margin: 0 0 0.4rem;
+}
+
+.grandparents__note{
+  font-family: var(--font-accent);
+  font-style: italic;
+  color: #634346;
+  font-size: 0.92rem;
+  margin: 0;
+}
+
+/* Floating Flower Petal Particle */
+.petal-particle{
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  border-radius: 50% 0 50% 50%;
+  animation: petalFall linear forwards;
+  opacity: 0.9;
+}
+
+@keyframes petalFall{
+  0%{
+    transform: translate(0, 0) rotate(0deg) scale(0.6);
+    opacity: 1;
+  }
+  50%{
+    transform: translate(var(--dx, 20px), var(--midY, 150px)) rotate(180deg) scale(1);
+    opacity: 0.9;
+  }
+  100%{
+    transform: translate(var(--endDx, -20px), var(--endY, 350px)) rotate(360deg) scale(0.8);
+    opacity: 0;
+  }
 }
 
 /* ---------- Venue ---------- */
@@ -1437,17 +1692,18 @@ button{ font-family: inherit; cursor: pointer; }
 
 @media (max-width: 480px) {
   .envelope{
-    height: 260px;
+    height: 250px;
   }
   .envelope__card{
-    height: 236px;
-    padding: 0.5rem;
+    height: 225px;
+    padding: 0.4rem;
   }
   .envelope.is-open .envelope__card{
-    transform: translateY(-130px) scale(1.03);
+    transform: translateY(-185px) translateZ(50px) scale(1.03);
+    z-index: 10;
   }
   .card__title{
-    font-size: 1.85rem;
+    font-size: 1.7rem;
   }
   .wax-seal{
     width: 62px;
