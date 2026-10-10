@@ -1,21 +1,29 @@
 // ===========================================================
-// Aarav & Diya — Wedding Invitation
-// Gate animation, ambient particles, countdown, RSVP -> FastAPI
+// Shivam & Supriya — Wedding Invitation
+// Gate animation, ambient particles, countdown, music, Google Drive photos
 // ===========================================================
 
-// The frontend talks to the backend via a relative "/api" path.
-// In docker-compose, nginx proxies "/api/*" to the FastAPI service.
-// For local (non-docker) dev, override by setting window.API_BASE
-// before this script loads, e.g. window.API_BASE = "http://localhost:8000"
-const API_BASE = window.API_BASE || "";
+/**
+ * 📸 GOOGLE DRIVE PHOTO CONFIGURATION (BRIDE & GROOM)
+ * ------------------------------------------------------------
+ * Google Drive sharing is set to "Anyone with the link can view".
+ */
+const GOOGLE_DRIVE_CONFIG = {
+  // Groom photo (Shivam):
+  groomPhoto: "https://drive.google.com/file/d/1cgaH5BBnx6I98h-J5bTNfiSVLiLifu_1/view?usp=drive_link",
+
+  // Bride photo (Supriya):
+  bridePhoto: "https://drive.google.com/file/d/1nosa-0wOCW30BimKaY8MtuYaP9ccazid/view?usp=drive_link",
+};
 
 document.addEventListener("DOMContentLoaded", () => {
   initParticles();
   initEnvelope();
   initScratchCard();
   initCountdown();
+  initSaveTheDate();
   initBlessingsInteractions();
-  initRSVP();
+  initGoogleDrivePhotos();
   initMusic();
 });
 
@@ -56,8 +64,11 @@ function initEnvelope() {
     if (isOpening) return;
     isOpening = true;
 
-    // Start background music seamlessly
+    // Start background music seamlessly from 22 seconds
     if (bgMusic && bgMusic.paused) {
+      if (bgMusic.currentTime < 22) {
+        try { bgMusic.currentTime = 22; } catch (err) {}
+      }
       bgMusic.play().then(() => {
         if (musicIconOn && musicIconOff) {
           musicIconOn.style.display = "block";
@@ -208,68 +219,9 @@ function initCountdown() {
   setInterval(tick, 1000);
 }
 
-/* ---------------- RSVP form -> FastAPI backend ---------------- */
-function initRSVP() {
-  const form = document.getElementById("rsvpForm");
-  const errorEl = document.getElementById("rsvpError");
-  const thankYou = document.getElementById("rsvpThankYou");
-  const submitBtn = document.getElementById("rsvpSubmit");
-  if (!form) return;
 
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    errorEl.hidden = true;
 
-    const fullName = form.full_name.value.trim();
-    const guests = parseInt(form.guests.value, 10);
-    const attending = form.attending.value === "true";
-    const message = form.message.value.trim();
-
-    if (!fullName) {
-      showError("Please enter your full name.");
-      return;
-    }
-
-    const payload = {
-      full_name: fullName,
-      guests,
-      attending,
-      message: message || null,
-    };
-
-    submitBtn.disabled = true;
-    submitBtn.querySelector("span").textContent = "Sending...";
-
-    try {
-      const res = await fetch(`${API_BASE}/api/rsvp`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({}));
-        throw new Error(err.detail || "Something went wrong. Please try again.");
-      }
-
-      form.hidden = true;
-      thankYou.hidden = false;
-      thankYou.scrollIntoView({ behavior: "smooth", block: "center" });
-    } catch (err) {
-      showError(err.message || "Could not send your RSVP. Please try again.");
-    } finally {
-      submitBtn.disabled = false;
-      submitBtn.querySelector("span").textContent = "Send Confirmation";
-    }
-  });
-
-  function showError(msg) {
-    errorEl.textContent = msg;
-    errorEl.hidden = false;
-  }
-}
-
-/* ---------------- Background Music ---------------- */
+/* ---------------- Background Music (Ranjha from Shershaah) ---------------- */
 function initMusic() {
   const bgMusic = document.getElementById("bgMusic");
   const musicToggle = document.getElementById("musicToggle");
@@ -279,27 +231,88 @@ function initMusic() {
 
   if (!bgMusic || !musicToggle) return;
 
-  function toggleMusic() {
-    if (bgMusic.paused) {
-      bgMusic.play();
-      musicIconOn.style.display = "block";
-      musicIconOff.style.display = "none";
-    } else {
-      bgMusic.pause();
-      musicIconOn.style.display = "none";
-      musicIconOff.style.display = "block";
+  const START_TIME = 22; // Start from 22 seconds
+
+  function setInitialSeek() {
+    if (bgMusic.currentTime < START_TIME) {
+      try {
+        bgMusic.currentTime = START_TIME;
+      } catch (err) {}
     }
   }
 
-  musicToggle.addEventListener("click", toggleMusic);
+  // Seek to 22s as soon as audio data is ready
+  bgMusic.addEventListener("loadedmetadata", setInitialSeek);
+  bgMusic.addEventListener("canplay", setInitialSeek);
+  setInitialSeek();
+
+  function updateUiPlaying(isPlaying) {
+    if (isPlaying) {
+      if (musicIconOn) musicIconOn.style.display = "block";
+      if (musicIconOff) musicIconOff.style.display = "none";
+      musicToggle.classList.add("is-playing");
+      musicToggle.setAttribute("title", "Pause Music (Ranjha - Shershaah)");
+      musicToggle.setAttribute("aria-label", "Pause Ranjha Background Music");
+    } else {
+      if (musicIconOn) musicIconOn.style.display = "none";
+      if (musicIconOff) musicIconOff.style.display = "block";
+      musicToggle.classList.remove("is-playing");
+      musicToggle.setAttribute("title", "Play Music (Ranjha - Shershaah)");
+      musicToggle.setAttribute("aria-label", "Play Ranjha Background Music");
+    }
+  }
+
+  function startMusic() {
+    setInitialSeek();
+    return bgMusic.play().catch(e => {
+      console.log("Audio autoplay waiting for user interaction:", e);
+    });
+  }
+
+  function toggleMusic() {
+    if (bgMusic.paused) {
+      startMusic();
+    } else {
+      bgMusic.pause();
+    }
+  }
+
+  musicToggle.addEventListener("click", (e) => {
+    e.stopPropagation();
+    toggleMusic();
+  });
+
+  // Sync state on native audio events
+  bgMusic.addEventListener("play", () => updateUiPlaying(true));
+  bgMusic.addEventListener("pause", () => updateUiPlaying(false));
+  bgMusic.addEventListener("ended", () => {
+    // Loop back to 22s for continuous melodic chorus
+    bgMusic.currentTime = START_TIME;
+    bgMusic.play().catch(() => {});
+  });
+
+  // Default is music ON: attempt immediate autoplay
+  startMusic();
+
+  // If browser blocks unmuted autoplay without gesture, start on first click/touch/keypress anywhere
+  function triggerOnFirstInteraction() {
+    if (bgMusic.paused) {
+      startMusic();
+    }
+    document.removeEventListener("click", triggerOnFirstInteraction);
+    document.removeEventListener("touchstart", triggerOnFirstInteraction);
+    document.removeEventListener("keydown", triggerOnFirstInteraction);
+  }
+
+  document.addEventListener("click", triggerOnFirstInteraction, { passive: true });
+  document.addEventListener("touchstart", triggerOnFirstInteraction, { passive: true });
+  document.addEventListener("keydown", triggerOnFirstInteraction, { passive: true });
 
   if (openBtn) {
     openBtn.addEventListener("click", () => {
-      // Play audio on first user interaction
-      bgMusic.play().then(() => {
-        musicIconOn.style.display = "block";
-        musicIconOff.style.display = "none";
-      }).catch(e => console.log("Audio play prevented:", e));
+      if (bgMusic.paused) {
+        startMusic();
+      }
     });
   }
 }
@@ -338,19 +351,19 @@ function initScratchCard() {
 
     ctx.globalCompositeOperation = "source-over";
 
-    // Rich metallic gold gradient
+    // Shimmering Champagne Rose-Gold & Twilight gradient
     const grad = ctx.createLinearGradient(0, 0, w, h);
-    grad.addColorStop(0, "#7a4e0a");
-    grad.addColorStop(0.2, "#d4a742");
-    grad.addColorStop(0.45, "#fff6cc");
-    grad.addColorStop(0.7, "#c9a24b");
-    grad.addColorStop(1, "#5c3905");
+    grad.addColorStop(0, "#3e2444");
+    grad.addColorStop(0.2, "#c99a6b");
+    grad.addColorStop(0.45, "#fff2db");
+    grad.addColorStop(0.7, "#d49a88");
+    grad.addColorStop(1, "#28122d");
 
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, w, h);
 
-    // Diagonal gold foil glitter lines
-    ctx.strokeStyle = "rgba(255, 255, 255, 0.22)";
+    // Diagonal champagne glitter lines
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.28)";
     ctx.lineWidth = 1.5;
     for (let i = -w; i < w + h; i += 22) {
       ctx.beginPath();
@@ -360,23 +373,23 @@ function initScratchCard() {
     }
 
     // Elegant inner border frame
-    ctx.strokeStyle = "rgba(255, 245, 205, 0.75)";
+    ctx.strokeStyle = "rgba(255, 245, 220, 0.85)";
     ctx.lineWidth = 2;
     ctx.strokeRect(8, 8, w - 16, h - 16);
 
-    ctx.strokeStyle = "rgba(201, 162, 75, 0.5)";
+    ctx.strokeStyle = "rgba(230, 185, 140, 0.55)";
     ctx.lineWidth = 1;
     ctx.strokeRect(12, 12, w - 24, h - 24);
 
     // Decorative Text & Monogram
-    ctx.fillStyle = "#361603";
+    ctx.fillStyle = "#261026";
     ctx.font = "bold 17px 'Marcellus', serif";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText("✦ SCRATCH TO REVEAL ✦", w / 2, h / 2 - 16);
 
     ctx.font = "italic 13px 'Cormorant Garamond', serif";
-    ctx.fillStyle = "#472105";
+    ctx.fillStyle = "#381836";
     ctx.fillText("Scratch with finger / mouse for Wedding Date & Countdown", w / 2, h / 2 + 14);
   }
 
@@ -442,7 +455,7 @@ function initScratchCard() {
       }
 
       const percentage = (transparentCount / totalSamples) * 100;
-      if (percentage >= 35) {
+      if (percentage >= 20) {
         revealAll();
       }
     } catch (err) {
@@ -583,5 +596,171 @@ function createFlowerShower(originX, originY) {
     setTimeout(() => petal.remove(), duration * 1000 + 100);
   }
 }
+
+/* ---------------- Save The Date Calendar Dropdown ---------------- */
+function initSaveTheDate() {
+  const btn = document.getElementById("btnSaveDate");
+  const dropdown = document.getElementById("calendarDropdown");
+  const calGoogle = document.getElementById("calGoogle");
+  const calOutlook = document.getElementById("calOutlook");
+  const calYahoo = document.getElementById("calYahoo");
+  const calApple = document.getElementById("calApple");
+  const calIcs = document.getElementById("calIcs");
+
+  if (!btn || !dropdown) return;
+
+  const eventData = {
+    title: "Wedding Ceremony of Shivam & Supriya",
+    description: "We cordially invite you to celebrate the wedding ceremony of Shivam and Supriya in Patna, Bihar.",
+    location: "Sainik Rest House Danapur Cantt, Patna, Bihar",
+    startIso: "2026-11-24T18:00:00",
+    endIso: "2026-11-24T23:59:00",
+    startUtc: "20261124T123000Z",
+    endUtc: "20261124T183000Z"
+  };
+
+  // Google Calendar URL
+  if (calGoogle) {
+    calGoogle.href = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventData.title)}&dates=${eventData.startUtc}/${eventData.endUtc}&details=${encodeURIComponent(eventData.description)}&location=${encodeURIComponent(eventData.location)}`;
+  }
+
+  // Outlook / Office 365 URL
+  if (calOutlook) {
+    calOutlook.href = `https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&startdt=${eventData.startIso}&enddt=${eventData.endIso}&subject=${encodeURIComponent(eventData.title)}&location=${encodeURIComponent(eventData.location)}&body=${encodeURIComponent(eventData.description)}`;
+  }
+
+  // Yahoo Calendar URL
+  if (calYahoo) {
+    calYahoo.href = `https://calendar.yahoo.com/?v=60&title=${encodeURIComponent(eventData.title)}&st=${eventData.startUtc}&et=${eventData.endUtc}&desc=${encodeURIComponent(eventData.description)}&in_loc=${encodeURIComponent(eventData.location)}`;
+  }
+
+  // Generate and Download .ics File for Apple / Generic Calendar
+  function downloadIcs(e) {
+    e.preventDefault();
+    const icsContent = [
+      "BEGIN:VCALENDAR",
+      "VERSION:2.0",
+      "PRODID:-//Shivam & Supriya Wedding//EN",
+      "CALSCALE:GREGORIAN",
+      "METHOD:PUBLISH",
+      "BEGIN:VEVENT",
+      `UID:wedding-shivam-supriya-${Date.now()}@wedding.invitation`,
+      "DTSTAMP:20261124T000000Z",
+      `DTSTART:${eventData.startUtc}`,
+      `DTEND:${eventData.endUtc}`,
+      `SUMMARY:${eventData.title}`,
+      `DESCRIPTION:${eventData.description}`,
+      `LOCATION:${eventData.location}`,
+      "STATUS:CONFIRMED",
+      "END:VEVENT",
+      "END:VCALENDAR"
+    ].join("\r\n");
+
+    const blob = new Blob([icsContent], { type: "text/calendar;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "wedding_shivam_supriya.ics";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+    closeDropdown();
+  }
+
+  if (calApple) calApple.addEventListener("click", downloadIcs);
+  if (calIcs) calIcs.addEventListener("click", downloadIcs);
+
+  // Toggle Dropdown
+  function toggleDropdown(e) {
+    e.stopPropagation();
+    const isActive = dropdown.classList.toggle("is-active");
+    btn.setAttribute("aria-expanded", String(isActive));
+  }
+
+  function closeDropdown() {
+    dropdown.classList.remove("is-active");
+    btn.setAttribute("aria-expanded", "false");
+  }
+
+  btn.addEventListener("click", toggleDropdown);
+
+  // Close when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!dropdown.contains(e.target) && !btn.contains(e.target)) {
+      closeDropdown();
+    }
+  });
+
+  // Close on Escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeDropdown();
+  });
+}
+
+/* ---------------- Google Drive Photo Loader & Direct Link Resolver ---------------- */
+function resolveDriveImageUrl(input) {
+  if (!input || typeof input !== "string") return "";
+  const trimmed = input.trim();
+
+  // If it's a Google Drive link or ID
+  if (trimmed.includes("drive.google.com") || trimmed.includes("docs.google.com")) {
+    const fileIdMatch = trimmed.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) ||
+                        trimmed.match(/[?&]id=([a-zA-Z0-9_-]+)/) ||
+                        trimmed.match(/\/d\/([a-zA-Z0-9_-]+)/);
+    if (fileIdMatch && fileIdMatch[1]) {
+      return `https://lh3.googleusercontent.com/d/${fileIdMatch[1]}`;
+    }
+  } else if (!trimmed.includes("/") && trimmed.length >= 25) {
+    // Treat as raw Google Drive File ID
+    return `https://lh3.googleusercontent.com/d/${trimmed}`;
+  }
+
+  // Return standard local path or web URL as-is
+  return trimmed;
+}
+
+function initGoogleDrivePhotos() {
+  if (typeof GOOGLE_DRIVE_CONFIG === "undefined") return;
+
+  const groomImg = document.getElementById("groomPhoto");
+  const brideImg = document.getElementById("bridePhoto");
+
+  // Load Groom Photo from Google Drive or local path
+  if (groomImg && GOOGLE_DRIVE_CONFIG.groomPhoto) {
+    const directGroomUrl = resolveDriveImageUrl(GOOGLE_DRIVE_CONFIG.groomPhoto);
+    groomImg.src = directGroomUrl;
+
+    if (directGroomUrl.includes("googleusercontent.com/d/")) {
+      const fileId = directGroomUrl.split("/d/")[1];
+      groomImg.onerror = () => {
+        groomImg.onerror = () => {
+          groomImg.onerror = null;
+          groomImg.src = "assets/shivam.jpeg";
+        };
+        groomImg.src = `https://drive.google.com/thumbnail?id=${fileId}&sz=w1600`;
+      };
+    }
+  }
+
+  // Load Bride Photo from Google Drive or local path
+  if (brideImg && GOOGLE_DRIVE_CONFIG.bridePhoto) {
+    const directBrideUrl = resolveDriveImageUrl(GOOGLE_DRIVE_CONFIG.bridePhoto);
+    brideImg.src = directBrideUrl;
+
+    if (directBrideUrl.includes("googleusercontent.com/d/")) {
+      const fileId = directBrideUrl.split("/d/")[1];
+      brideImg.onerror = () => {
+        brideImg.onerror = () => {
+          brideImg.onerror = null;
+          brideImg.src = "assets/supriya.jpeg";
+        };
+        brideImg.src = `https://drive.google.com/thumbnail?id=${fileId}&sz=w1600`;
+      };
+    }
+  }
+}
+
+
 
 

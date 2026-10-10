@@ -1,149 +1,142 @@
-# Shivam & Supriya — Royal Wedding Invitation (Full Stack) 💍
+# 💍 Shivam & Supriya — Royal Wedding Invitation
 
-A royal full-stack wedding invitation website created for **Shivam & Supriya**'s wedding in Patna, Bihar (November 24, 2026).
+[![Static Badge](https://img.shields.io/badge/Architecture-Pure_Frontend-gold?style=for-the-badge)](file:///c:/Users/MDMuzammil-Int/wedding-invitation-website-/frontend)
+[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](file:///c:/Users/MDMuzammil-Int/wedding-invitation-website-/frontend/index.html)
+[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](file:///c:/Users/MDMuzammil-Int/wedding-invitation-website-/frontend/css/style.css)
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](file:///c:/Users/MDMuzammil-Int/wedding-invitation-website-/frontend/js/script.js)
+[![License](https://img.shields.io/badge/Celebration-Nov_2026-critical?style=for-the-badge)](#)
 
-- **Frontend:** HTML5, CSS3 (Custom animations, glassmorphism, responsive royal aesthetic), Vanilla JavaScript (Zero build tools required — served via Nginx container).
-- **Backend:** Python 3.11 + FastAPI, SQLAlchemy ORM, Pydantic schemas, SQLite database (pluggable with PostgreSQL via `DATABASE_URL`).
-- **Containerized:** Dockerized frontend and backend with `docker-compose.yml` for unified local execution and seamless cloud deployment.
+A luxurious, interactive digital wedding invitation website crafted for **Shivam & Supriya**'s wedding celebrations in Patna, Bihar (November 2026).
 
----
-
-## ✨ Features
-
-- **Royal Entrance Gate:** Interactive opening gate with ambient gold particle effects and background music toggle.
-- **Dynamic Live Countdown:** Real-time countdown timer to November 24, 2026.
-- **Our Story Section:** Photo gallery featuring Shivam & Supriya.
-- **Event Timeline:** Schedule for Engagement, Mehendi, Sangeet Night, and Wedding ceremonies.
-- **Interactive RSVP System:** Real-time RSVP form allowing guests to confirm attendance, submit guest counts, and send personal wishes (persisted via FastAPI & SQLite database).
-- **Venue Map:** Embedded interactive Google Maps location guide.
-- **Admin & API Docs:** Interactive Swagger UI for RSVP management at `/docs`.
+Designed with a royal Indian aesthetic featuring deep burgundy and champagne gold palettes, smooth glassmorphism, traditional Sanskrit shlokas, dynamic particle animations, and direct Google Drive cloud photo streaming.
 
 ---
 
-## 📁 Project Structure
+## ✨ Features & Highlights
+
+- ✉️ **Royal Wax Seal & 3D Envelope:** An interactive unboxing experience with realistic wax seal breaking, card lift animation, and scratch-to-reveal invite card.
+- 🎵 **Ambient Background Music:** Automated background playback of *"Ranjha"* (*Shershaah*) with a floating music toggle button.
+- ✨ **Golden Ambient Particle Engine:** Lightweight floating gold sparkle particle system for an authentic royal ambiance.
+- ⏳ **Live Countdown Timer:** Real-time countdown tracking days, hours, minutes, and seconds until the wedding day.
+- 📸 **Google Drive Photo Streaming:** Seamlessly loads Bride & Groom portraits directly from public Google Drive links with multi-tier CDN caching and local fallbacks.
+- 🗓️ **"Save the Date" 1-Click Calendar:** 
+  - Add directly to **Google Calendar** (with auto-filled event details, dates, and venue location).
+  - Download universal `.ics` file for **Apple iCal** and **Microsoft Outlook**.
+- 🌸 **Interactive Flower Shower Blessings:** Tap on the Parents' tribute cards to trigger a 3D golden flower petal shower celebration.
+- 🗺️ **Interactive Events Timeline & Navigation:** Complete ceremony schedule with direct 1-tap Google Maps directions for every venue.
+- 📱 **100% Responsive:** Pixel-perfect experience optimized across mobile phones, tablets, laptops, and ultra-wide screens.
+- ⚡ **Zero Build Tools / 100% Serverless:** Pure HTML, CSS, and Vanilla JavaScript with no Node.js/Python server dependencies.
+
+---
+
+## 📅 Wedding Events Schedule
+
+| Date & Time | Ceremony | Venue | Map Link |
+| :--- | :--- | :--- | :--- |
+| **Nov 21, 2026 \| 6:00 PM** | **Tilak Ceremony** | Usri Bandh Jamshaut Road, Patna, Bihar | [View Map ↗](https://maps.app.goo.gl/uyPPQ3ENX7NJNwUK8) |
+| **Nov 23, 2026 \| 6:00 PM** | **Haldi & Mehndi Ceremony** | Usri Bandh Jamshaut Road, Patna, Bihar | [View Map ↗](https://maps.app.goo.gl/uyPPQ3ENX7NJNwUK8) |
+| **Nov 24, 2026 \| 6:00 PM** | **The Baraat & Wedding** | Sainik Rest House, Danapur Cantt, Patna | [View Map ↗](https://maps.app.goo.gl/2swnAPzT2U7tK1G79) |
+| **Nov 26, 2026 \| 7:30 PM** | **Grand Reception** | Amantran Marriage Garden, Takiapar, Danapur, Patna | [View Map ↗](https://maps.app.goo.gl/RXHxwvkQmM5Brbh4A) |
+
+---
+
+## 📁 Repository Structure
 
 ```
 wedding-invitation-website/
-├── backend/
-│   ├── app/
-│   │   ├── main.py            # FastAPI entrypoint & CORS setup
-│   │   ├── database.py        # SQLAlchemy engine & session management
-│   │   ├── models.py          # Database model for RSVPs
-│   │   ├── schemas.py         # Pydantic data validation schemas
-│   │   ├── crud.py            # Database CRUD helper functions
-│   │   └── routers/rsvp.py    # RSVP API endpoints (/api/rsvp)
-│   ├── requirements.txt       # Python dependencies (FastAPI, uvicorn, sqlalchemy)
-│   ├── Dockerfile             # Python FastAPI container configuration
-│   └── .env.example
 ├── frontend/
-│   ├── index.html             # Main invitation page markup
-│   ├── css/style.css          # Royal theme styling, animations & fonts
-│   ├── js/script.js           # Countdown timer, gate animations & RSVP API integration
-│   ├── nginx.conf             # Nginx server configuration with API proxying
-│   └── Dockerfile             # Nginx static server container
-├── Photos/                    # Couple photography assets
-├── docker-compose.yml         # Container orchestration configuration
-├── .gitignore                 # Excluded files (virtual environments, database files, secrets)
+│   ├── assets/
+│   │   ├── events_bg.jpg      # Background for wedding events timeline
+│   │   ├── gratitude_bg.jpg   # Background for gratitude & shloka section
+│   │   ├── hero_bg.jpg        # Royal palace background for hero entrance
+│   │   └── ranjha.mp3         # Background wedding music track
+│   ├── css/
+│   │   └── style.css          # Royal theme styling, animations & responsiveness
+│   ├── js/
+│   │   └── script.js          # Google Drive photo loader, audio, countdown & envelope logic
+│   └── index.html             # Main wedding invitation page markup
+├── .gitignore
 └── README.md
 ```
 
 ---
 
-## 🚀 Quick Start (Local Development)
+## 📸 Managing Google Drive Photos
 
-### 1. Backend Setup
+The Bride and Groom portraits in the **Our Story** section stream directly from Google Drive.
 
-```bash
-cd backend
-python -m venv .venv
+To update or replace the photos in the future:
+1. Upload your photo to Google Drive.
+2. Right-click the photo ➔ **Share** ➔ **Share** ➔ set *General access* to **"Anyone with the link"**.
+3. Copy the link and paste it into [`frontend/js/script.js`](file:///c:/Users/MDMuzammil-Int/wedding-invitation-website-/frontend/js/script.js#L11-L17):
 
-# Activate Virtual Environment:
-# On Windows (PowerShell):
-.venv\Scripts\Activate.ps1
-# On Linux/macOS:
-source .venv/bin/activate
+```javascript
+const GOOGLE_DRIVE_CONFIG = {
+  // Groom photo (Shivam):
+  groomPhoto: "https://drive.google.com/file/d/YOUR_GROOM_FILE_ID/view?usp=drive_link",
 
-# Install Dependencies & Run
-pip install -r requirements.txt
-uvicorn app.main:app --reload --port 8000
+  // Bride photo (Supriya):
+  bridePhoto: "https://drive.google.com/file/d/YOUR_BRIDE_FILE_ID/view?usp=drive_link",
+};
 ```
 
-> 💡 **Swagger API Documentation:** Once running, visit `http://localhost:8000/docs` to test endpoints and view submitted RSVPs.
+> **Note:** The script automatically transforms the share link into a high-speed direct CDN stream (`lh3.googleusercontent.com/d/FILE_ID`) and includes automatic fallback to local assets if offline.
 
 ---
 
-### 2. Frontend Setup
+## 🚀 How to Run Locally
 
-Serve the `frontend` folder using any simple HTTP server:
+Because the project is 100% pure frontend, you can run it instantly without installing any dependencies:
 
+### Method 1: Open Directly
+Double-click [`frontend/index.html`](file:///c:/Users/MDMuzammil-Int/wedding-invitation-website-/frontend/index.html) to open it directly in Chrome, Edge, Safari, or Firefox.
+
+### Method 2: Local HTTP Server (Recommended)
 ```bash
+# Navigate to the frontend folder
 cd frontend
+
+# Start a simple Python local server
 python -m http.server 5500
 ```
+Open **`http://localhost:5500`** in your browser.
 
-Open `http://localhost:5500` in your browser. 
-
-*Note: For local standalone running across different ports, add `<script>window.API_BASE = "http://localhost:8000";</script>` above `js/script.js` in `index.html`.*
-
----
-
-## 🐳 Run with Docker Compose (Recommended)
-
-Run both frontend and backend seamlessly without manually installing Python dependencies:
-
-```bash
-docker compose up --build
-```
-
-- **Frontend Application:** [http://localhost](http://localhost)
-- **Backend API Docs:** [http://localhost:8000/docs](http://localhost:8000/docs)
-
-*Nginx automatically routes `/api/*` network calls to the backend container internally.*
-
-To stop the containers:
-```bash
-docker compose down
-```
+### Method 3: VS Code Live Server
+Right-click `frontend/index.html` in VS Code and select **"Open with Live Server"**.
 
 ---
 
-## 🔗 Repository & GitHub Commands
+## 🌐 Free Hosting & Deployment Guide
 
-This repository is hosted at:
-`https://github.com/muzammilabdin29/wedding-invitation-website-.git`
+This static website can be hosted for free with custom domain support on any modern static platform:
 
-To push recent changes to GitHub:
+### 1. GitHub Pages (Free)
+1. Push your repository to GitHub.
+2. Go to repository **Settings** ➔ **Pages**.
+3. Under *Branch*, select `main` and set the folder to `/frontend` (or move files to root).
+4. Click **Save** — your site will be live at `https://<username>.github.io/<repo-name>/`.
 
-```bash
-git add README.md
-git commit -m "Update README with Shivam & Supriya wedding project details"
-git push origin main
-```
+### 2. Vercel (1-Click Deployment)
+1. Import your GitHub repository on [Vercel](https://vercel.com).
+2. Set **Root Directory** to `frontend`.
+3. Click **Deploy**.
 
----
-
-## 🛠️ API Reference
-
-| Method | Endpoint | Description |
-| :--- | :--- | :--- |
-| **GET** | `/api/health` | Service health status check |
-| **POST** | `/api/rsvp` | Submit guest RSVP confirmation |
-| **GET** | `/api/rsvp` | Fetch list of all submitted RSVPs |
-| **GET** | `/api/rsvp/summary` | Summary stats (attending count, guest totals) |
-
-### Sample RSVP Payload (`POST /api/rsvp`)
-```json
-{
-  "full_name": "Rohan Sharma",
-  "guests": 2,
-  "attending": true,
-  "message": "Congratulations Shivam & Supriya! Looking forward to the celebration."
-}
-```
+### 3. Netlify
+1. Drag and drop the `frontend` folder onto [Netlify Drop](https://app.netlify.com/drop).
+2. Your site goes live instantly with an HTTPS link.
 
 ---
 
-## 📜 License
+## 🎨 Customization Guide
 
-Created with ❤️ for **Shivam & Supriya**'s Wedding Celebration.
+- **Change Music:** Replace `frontend/assets/ranjha.mp3` with any `.mp3` file of your choice.
+- **Change Event Details/Times:** Edit the `<section class="section events">` inside [`frontend/index.html`](file:///c:/Users/MDMuzammil-Int/wedding-invitation-website-/frontend/index.html).
+- **Update Wedding Date/Countdown:** Update the target date in [`frontend/js/script.js`](file:///c:/Users/MDMuzammil-Int/wedding-invitation-website-/frontend/js/script.js) under `initCountdown()`.
+- **Theme Colors & Fonts:** Adjust the CSS root variables in [`frontend/css/style.css`](file:///c:/Users/MDMuzammil-Int/wedding-invitation-website-/frontend/css/style.css) (`--gold`, `--burgundy-deep`, `--cream`).
 
+---
+
+## 📜 License & Credits
+
+- **Designed & Developed by:** **Mr Bob**
+- Created with ❤️ for **Shivam & Supriya**'s Wedding Celebration.
