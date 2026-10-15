@@ -1,31 +1,42 @@
 # 💍 Shivam & Supriya — Royal Wedding Invitation
 
-[![Static Badge](https://img.shields.io/badge/Architecture-Pure_Frontend-gold?style=for-the-badge)](file:///c:/Users/MDMuzammil-Int/wedding-invitation-website-/frontend)
-[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](file:///c:/Users/MDMuzammil-Int/wedding-invitation-website-/frontend/index.html)
-[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](file:///c:/Users/MDMuzammil-Int/wedding-invitation-website-/frontend/css/style.css)
-[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](file:///c:/Users/MDMuzammil-Int/wedding-invitation-website-/frontend/js/script.js)
-[![License](https://img.shields.io/badge/Celebration-Nov_2026-critical?style=for-the-badge)](#)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Visit_Website-success?style=for-the-badge&logo=vercel)](https://wedding-invitation-website-frontend.vercel.app/)
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed_on-Vercel-black?style=for-the-badge&logo=vercel)](https://wedding-invitation-website-frontend.vercel.app/)
+[![Pure Frontend](https://img.shields.io/badge/Architecture-Pure_Frontend-gold?style=for-the-badge)](#)
+[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](#)
+[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](#)
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](#)
+[![Celebration](https://img.shields.io/badge/Celebration-Nov_2026-critical?style=for-the-badge)](#)
+
+> 🌟 **Live Website:** **[https://wedding-invitation-website-frontend.vercel.app/](https://wedding-invitation-website-frontend.vercel.app/)**
+>
+> *An interactive, royal Indian digital wedding invitation featuring realistic 3D envelope unboxing, background wedding melodies, live countdown, and one-click calendar sync.*
+
+---
+
+## 📖 Overview
 
 A luxurious, interactive digital wedding invitation website crafted for **Shivam & Supriya**'s wedding celebrations in Patna, Bihar (November 2026).
 
-Designed with a royal Indian aesthetic featuring deep burgundy and champagne gold palettes, smooth glassmorphism, traditional Sanskrit shlokas, dynamic particle animations, and direct Google Drive cloud photo streaming.
+Designed with a rich royal Indian aesthetic featuring deep burgundy, plum, and champagne gold palettes, smooth glassmorphism, traditional Sanskrit shlokas, floating golden particles, interactive flower petal showers, and Google Drive cloud photo streaming.
 
 ---
 
 ## ✨ Features & Highlights
 
-- ✉️ **Royal Wax Seal & 3D Envelope:** An interactive unboxing experience with realistic wax seal breaking, card lift animation, and scratch-to-reveal invite card.
-- 🎵 **Ambient Background Music:** Automated background playback of *"Ranjha"* (*Shershaah*) with a floating music toggle button.
+- ✉️ **Royal Wax Seal & 3D Envelope Unboxing:** An interactive unboxing experience featuring realistic wax seal breaking, sparkle explosion, and a smooth slide-out card with scratch-to-reveal wedding details.
+- 🎵 **Continuous Background Melodies:** Automated playback of *"Ranjha"* (*Shershaah*) with a persistent floating play/pause audio controller.
 - ✨ **Golden Ambient Particle Engine:** Lightweight floating gold sparkle particle system for an authentic royal ambiance.
-- ⏳ **Live Countdown Timer:** Real-time countdown tracking days, hours, minutes, and seconds until the wedding day.
-- 📸 **Google Drive Photo Streaming:** Seamlessly loads Bride & Groom portraits directly from public Google Drive links with multi-tier CDN caching and local fallbacks.
-- 🗓️ **"Save the Date" 1-Click Calendar:** 
-  - Add directly to **Google Calendar** (with auto-filled event details, dates, and venue location).
-  - Download universal `.ics` file for **Apple iCal** and **Microsoft Outlook**.
-- 🌸 **Interactive Flower Shower Blessings:** Tap on the Parents' tribute cards to trigger a 3D golden flower petal shower celebration.
-- 🗺️ **Interactive Events Timeline & Navigation:** Complete ceremony schedule with direct 1-tap Google Maps directions for every venue.
-- 📱 **100% Responsive:** Pixel-perfect experience optimized across mobile phones, tablets, laptops, and ultra-wide screens.
-- ⚡ **Zero Build Tools / 100% Serverless:** Pure HTML, CSS, and Vanilla JavaScript with no Node.js/Python server dependencies.
+- ⏳ **Live Countdown Timer:** Real-time countdown tracking days, hours, minutes, and seconds until the Baraat & Wedding on **November 24, 2026 at 7:00 PM IST**.
+- 🗓️ **"Save the Date" 1-Click Calendar:**
+  - **Google Calendar:** Auto-filled event title, timings, description, and venue location.
+  - **Microsoft Outlook & Yahoo Calendar:** Direct compose links with pre-filled event metadata.
+  - **Apple Calendar / Universal `.ics`:** Downloadable calendar file compatible with iOS, macOS, and desktop calendar clients.
+- 🌸 **Interactive Flower Shower Blessings:** Tap on the Parents' tribute cards to trigger a 3D animated golden flower petal shower.
+- 🗺️ **Ceremony Timeline & Navigation:** Complete ceremony schedule with direct 1-tap Google Maps directions for every venue.
+- 📸 **Google Drive Photo Streaming:** Bride & Groom portraits stream directly from Google Drive using high-speed CDN links with local fallback handling.
+- 📱 **Mobile-First & 100% Responsive:** Pixel-perfect layout tailored for smartphones, tablets, laptops, and large screens.
+- ⚡ **Zero Build Tools / 100% Serverless:** Pure HTML5, CSS3, and Vanilla JavaScript with no dependencies or build steps required.
 
 ---
 
@@ -33,10 +44,10 @@ Designed with a royal Indian aesthetic featuring deep burgundy and champagne gol
 
 | Date & Time | Ceremony | Venue | Map Link |
 | :--- | :--- | :--- | :--- |
-| **Nov 21, 2026 \| 6:00 PM** | **Tilak Ceremony** | Usri Bandh Jamshaut Road, Patna, Bihar | [View Map ↗](https://maps.app.goo.gl/uyPPQ3ENX7NJNwUK8) |
-| **Nov 23, 2026 \| 6:00 PM** | **Haldi & Mehndi Ceremony** | Usri Bandh Jamshaut Road, Patna, Bihar | [View Map ↗](https://maps.app.goo.gl/uyPPQ3ENX7NJNwUK8) |
-| **Nov 24, 2026 \| 6:00 PM** | **The Baraat & Wedding** | Sainik Rest House, Danapur Cantt, Patna | [View Map ↗](https://maps.app.goo.gl/2swnAPzT2U7tK1G79) |
-| **Nov 26, 2026 \| 7:30 PM** | **Grand Reception** | Amantran Marriage Garden, Takiapar, Danapur, Patna | [View Map ↗](https://maps.app.goo.gl/RXHxwvkQmM5Brbh4A) |
+| **Nov 21, 2026 \| 12:00 PM** | **Tilak Ceremony** | Usri Bandh Jamshaut Road, Patna, Bihar | [View Map ↗](https://maps.app.goo.gl/uyPPQ3ENX7NJNwUK8) |
+| **Nov 23, 2026 \| Haldi: 2:00 PM &bull; Mehndi: 5:00 PM** | **Haldi & Mehndi Ceremony** | Usri Bandh Jamshaut Road, Patna, Bihar | [View Map ↗](https://maps.app.goo.gl/uyPPQ3ENX7NJNwUK8) |
+| **Nov 24, 2026 \| 7:00 PM** | **The Baraat & Wedding** | Sainik Rest House, Danapur Cantt, Patna | [View Map ↗](https://maps.app.goo.gl/2swnAPzT2U7tK1G79) |
+| **Nov 26, 2026 \| 7:00 PM** | **Grand Reception** | Amantran Marriage Garden, Takiapar, Danapur, Patna | [View Map ↗](https://maps.app.goo.gl/RXHxwvkQmM5Brbh4A) |
 
 ---
 
@@ -53,9 +64,10 @@ wedding-invitation-website/
 │   ├── css/
 │   │   └── style.css          # Royal theme styling, animations & responsiveness
 │   ├── js/
-│   │   └── script.js          # Google Drive photo loader, audio, countdown & envelope logic
+│   │   └── script.js          # Audio, countdown, envelope & calendar logic
 │   └── index.html             # Main wedding invitation page markup
 ├── .gitignore
+├── memory.md
 └── README.md
 ```
 
@@ -63,12 +75,11 @@ wedding-invitation-website/
 
 ## 📸 Managing Google Drive Photos
 
-The Bride and Groom portraits in the **Our Story** section stream directly from Google Drive.
+The Bride and Groom portraits in the **Our Story** section can be updated anytime directly via Google Drive links without re-uploading image files:
 
-To update or replace the photos in the future:
-1. Upload your photo to Google Drive.
+1. Upload the photo to Google Drive.
 2. Right-click the photo ➔ **Share** ➔ **Share** ➔ set *General access* to **"Anyone with the link"**.
-3. Copy the link and paste it into [`frontend/js/script.js`](file:///c:/Users/MDMuzammil-Int/wedding-invitation-website-/frontend/js/script.js#L11-L17):
+3. Copy the link and update `GOOGLE_DRIVE_CONFIG` in `frontend/js/script.js`:
 
 ```javascript
 const GOOGLE_DRIVE_CONFIG = {
@@ -80,63 +91,51 @@ const GOOGLE_DRIVE_CONFIG = {
 };
 ```
 
-> **Note:** The script automatically transforms the share link into a high-speed direct CDN stream (`lh3.googleusercontent.com/d/FILE_ID`) and includes automatic fallback to local assets if offline.
-
 ---
 
-## 🚀 How to Run Locally
+## 🚀 Running Locally
 
-Because the project is 100% pure frontend, you can run it instantly without installing any dependencies:
+Because the project is built with pure vanilla web standards, you can run it immediately without installing npm packages:
 
-### Method 1: Open Directly
-Double-click [`frontend/index.html`](file:///c:/Users/MDMuzammil-Int/wedding-invitation-website-/frontend/index.html) to open it directly in Chrome, Edge, Safari, or Firefox.
+### Option 1: Open Directly in Browser
+Double-click `frontend/index.html` to open it in Chrome, Edge, Safari, or Firefox.
 
-### Method 2: Local HTTP Server (Recommended)
+### Option 2: Local HTTP Server (Recommended)
 ```bash
-# Navigate to the frontend folder
+# Navigate to frontend folder
 cd frontend
 
-# Start a simple Python local server
+# Run a lightweight local server with Python
 python -m http.server 5500
 ```
 Open **`http://localhost:5500`** in your browser.
 
-### Method 3: VS Code Live Server
+### Option 3: VS Code Live Server
 Right-click `frontend/index.html` in VS Code and select **"Open with Live Server"**.
 
 ---
 
-## 🌐 Free Hosting & Deployment Guide
+## 🌐 Deployment
 
-This static website can be hosted for free with custom domain support on any modern static platform:
+The project is hosted and continuously deployed on **Vercel**:
 
-### 1. GitHub Pages (Free)
-1. Push your repository to GitHub.
-2. Go to repository **Settings** ➔ **Pages**.
-3. Under *Branch*, select `main` and set the folder to `/frontend` (or move files to root).
-4. Click **Save** — your site will be live at `https://<username>.github.io/<repo-name>/`.
-
-### 2. Vercel (1-Click Deployment)
-1. Import your GitHub repository on [Vercel](https://vercel.com).
-2. Set **Root Directory** to `frontend`.
-3. Click **Deploy**.
-
-### 3. Netlify
-1. Drag and drop the `frontend` folder onto [Netlify Drop](https://app.netlify.com/drop).
-2. Your site goes live instantly with an HTTPS link.
+- **Live URL:** [https://wedding-invitation-website-frontend.vercel.app/](https://wedding-invitation-website-frontend.vercel.app/)
+- **Root Directory:** `frontend`
+- **Build Command:** *(None required — static HTML/CSS/JS)*
+- **Output Directory:** `.`
 
 ---
 
 ## 🎨 Customization Guide
 
-- **Change Music:** Replace `frontend/assets/ranjha.mp3` with any `.mp3` file of your choice.
-- **Change Event Details/Times:** Edit the `<section class="section events">` inside [`frontend/index.html`](file:///c:/Users/MDMuzammil-Int/wedding-invitation-website-/frontend/index.html).
-- **Update Wedding Date/Countdown:** Update the target date in [`frontend/js/script.js`](file:///c:/Users/MDMuzammil-Int/wedding-invitation-website-/frontend/js/script.js) under `initCountdown()`.
-- **Theme Colors & Fonts:** Adjust the CSS root variables in [`frontend/css/style.css`](file:///c:/Users/MDMuzammil-Int/wedding-invitation-website-/frontend/css/style.css) (`--gold`, `--burgundy-deep`, `--cream`).
+- **Change Music:** Replace `frontend/assets/ranjha.mp3` with any `.mp3` audio track of your choice.
+- **Change Event Timings & Details:** Edit `<section class="section events">` in `frontend/index.html`.
+- **Update Wedding Countdown:** Adjust the target date in `frontend/js/script.js` inside `initCountdown()`.
+- **Change Palette / Styles:** Edit the CSS custom properties in `frontend/css/style.css` (`--gold`, `--maroon`, `--cream`).
 
 ---
 
-## 📜 License & Credits
+## 📜 Credits
 
-- **Designed & Developed by:** **Mr Bob**
-- Created with ❤️ for **Shivam & Supriya**'s Wedding Celebration.
+- **Designed & Developed with ❤️ by:** **Mr Bob**
+- Created for **Shivam & Supriya**'s Wedding Celebration.

@@ -185,7 +185,7 @@ function createSparkleBurst(x, y) {
 
 /* ---------------- Countdown to the wedding ---------------- */
 function initCountdown() {
-  const target = new Date("2026-11-24T17:00:00+05:30").getTime();
+  const target = new Date("2026-11-24T19:00:00+05:30").getTime();
   const els = {
     days: document.getElementById("cd-days"),
     hours: document.getElementById("cd-hours"),
@@ -613,9 +613,9 @@ function initSaveTheDate() {
     title: "Wedding Ceremony of Shivam & Supriya",
     description: "We cordially invite you to celebrate the wedding ceremony of Shivam and Supriya in Patna, Bihar.",
     location: "Sainik Rest House Danapur Cantt, Patna, Bihar",
-    startIso: "2026-11-24T18:00:00",
+    startIso: "2026-11-24T19:00:00",
     endIso: "2026-11-24T23:59:00",
-    startUtc: "20261124T123000Z",
+    startUtc: "20261124T133000Z",
     endUtc: "20261124T183000Z"
   };
 

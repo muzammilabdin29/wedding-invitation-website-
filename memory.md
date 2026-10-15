@@ -1,34 +1,38 @@
 # Project Memory: Wedding Invitation Website
 
 ## Overview
-A royal Udaipur-themed wedding invitation website rebuilt as a full-stack application. It features an interactive UI for guests and a backend to manage RSVP submissions.
+A luxurious, royal Indian digital wedding invitation website crafted for **Shivam & Supriya**'s wedding in Patna, Bihar (November 2026).
+
+## Live Deployment
+- **Live URL**: [https://wedding-invitation-website-frontend.vercel.app/](https://wedding-invitation-website-frontend.vercel.app/)
+- **Platform**: Vercel (Deployed from `frontend` directory)
 
 ## Tech Stack
-- **Frontend**: Plain HTML, CSS, Vanilla JavaScript. Served via Nginx in Docker.
-- **Backend**: Python, FastAPI, SQLAlchemy, SQLite (Postgres supported via `DATABASE_URL`).
-- **Containerization**: Docker, Docker Compose for local execution and deployment.
+- **Architecture**: 100% Pure Frontend (Static Web Application)
+- **Languages**: Semantic HTML5, Modern Vanilla CSS3, Vanilla JavaScript (ES6+)
+- **Build / Dependencies**: Zero build tools required; runs natively in any modern browser.
 
 ## Project Structure
-- `frontend/`: Contains the UI. Entry point is `index.html`. Styles in `css/style.css`, logic in `js/script.js`. Nginx configuration is `nginx.conf`.
-- `backend/`: FastAPI application. 
-  - `app/main.py`: Entry point for FastAPI.
-  - `app/models.py` & `app/schemas.py`: Database models and Pydantic schemas.
-  - `app/routers/rsvp.py`: Contains API endpoints for RSVP handling.
-  - `data/`: SQLite data folder (ignored in git).
-- `docker-compose.yml`: Local setup running both frontend and backend.
-- `README.md`: Instructions for setup and deployment.
+- `frontend/`:
+  - `index.html`: Main wedding invitation document.
+  - `css/style.css`: Royal theme styling (deep plum, burgundy, champagne gold), animations, responsive layouts.
+  - `js/script.js`: Audio playback controller, 3D envelope opening animation, sparkle particles, live countdown, calendar integration, and Google Drive photo streaming.
+  - `assets/`: Background images (`hero_bg.jpg`, `events_bg.jpg`, `gratitude_bg.jpg`) and audio soundtrack (`ranjha.mp3`).
+- `README.md`: Project documentation, feature guide, and deployment details.
 
 ## Key Features
-- **Interactive UI**: Animated "Open Invitation" gate, live countdown, timeline, and photo gallery.
-- **RSVP System**: Guests can RSVP, data is submitted to the FastAPI backend and stored in the database.
-- **Responsive Design**: Built for both desktop and mobile views.
-
-## Development Notes
-- When running locally without Docker, the frontend (`http://localhost:5500`) needs `window.API_BASE = "http://localhost:8000"` to communicate with the backend.
-- With Docker Compose (`docker compose up --build`), Nginx automatically proxies `/api` to the backend.
-- RSVP data is persisted via a Docker volume (`backend_data` or `wedding_data` depending on compose/manual run).
+- **3D Envelope Unboxing & Wax Seal**: Realistic wax seal breaking with sparkle burst and slide-out card.
+- **Background Music**: Autoplay with interactive toggle for *"Ranjha"* (*Shershaah*).
+- **Wedding Countdown**: Real-time countdown to Nov 24, 2026 at 7:00 PM IST.
+- **Calendar Integration**: 1-click Save the Date for Google Calendar, Outlook, Yahoo, and universal `.ics` (Apple Calendar).
+- **Interactive Blessings**: Flower shower celebration on tapping parents' tribute cards.
+- **Events Timeline**: Complete ceremony schedule with direct 1-tap Google Maps directions:
+  - Nov 21, 2026 | 12:00 PM — Tilak Ceremony
+  - Nov 23, 2026 | Haldi: 2:00 PM • Mehndi: 5:00 PM — Haldi & Mehndi Ceremony
+  - Nov 24, 2026 | 7:00 PM — The Baraat & Wedding
+  - Nov 26, 2026 | 7:00 PM — The Grand Reception
+- **Google Drive CDN Streaming**: Cloud-loaded portraits for Bride and Groom with automatic fallbacks.
 
 ## Guidelines for AI Assistant
-- Update this `memory.md` file whenever significant architectural, structural, or business logic changes are made to the codebase.
-- Maintain the vanilla nature of the frontend (no build tools like Webpack/Vite unless requested).
-- Ensure any new backend endpoints follow the existing FastAPI + SQLAlchemy structure.
+- Keep the project pure frontend with zero build tool dependencies.
+- Retain royal Indian aesthetics and responsiveness across all devices.
